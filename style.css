@@ -1,0 +1,100 @@
+
+
+
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background: linear-gradient(to right,85, 134, 90,);
+color: rgb(248, 243, 243);
+background-color: rgb(240, 248, 253);
+
+}
+
+.container{
+  margin: 0 15px;
+  
+}
+
+.form-box{
+  width: 100%;
+  max-width: 450px;
+  padding: 30px;
+  background:rgb(53, 130, 218);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.1);
+  display:none;
+}
+.form-box.active{
+  display: block;
+}
+
+
+
+h2{
+  font-size: 34px;
+  text-align:center;
+  margin-bottom: 20px;
+}
+input,Register-form{
+  width: 100%;
+  padding:10px;
+ border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #0c0909;
+  margin-bottom: 20px;  
+ background:#ece4e4;
+ margin:8px 0;
+ box-sizing: border-box;
+
+}
+
+p{
+  font-size: 14.5px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.selec{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}
+
+
+.register{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+   border:1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: rgb(30, 230, 12);
+  color:white;
+  cursor: pointer;
+}
+
+
+
+.Login{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: rgb(30, 230, 12);
+  color:white;
+  cursor: pointer;
+}
+
