@@ -1,355 +1,128 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nyeri Catholic Computerized System</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<h1>Welcome to Nyeri Catholic Computerized System</h1>
 <body>
+  <h1>Welcome to Nyeri Catholic Computerized System</h1>
 
-   
-  <link rel="stylesheet" href="style.css">
+  <div class="container">
+    <!-- Login box -->
+    <div class="form-box active" id="login-form">
+      <form id="loginForm" action="">
+        <h2>Login</h2>
+        <input type="email" name="email" placeholder="email" class="selec" required />
+        <input type="password" name="password" placeholder="password" class="selec" required />
+        <button type="submit" class="Login">Login</button>
+        <p>Don't have an account? <a href="#" class="show-register">Register</a></p>
+      </form>
+    </div>
+
+    <!-- Register box -->
+    <div class="form-box" id="register-form">
+      <form id="registerForm" action="">
+        <h2>Register</h2>
+
+        <input type="text" name="name" placeholder="Name" class="selec" required />
+        <input type="text" name="diocese" placeholder="Diocese" class="selec" required />
+
+        <select id="denary" name="denary" required class="selec">
+          <option value="">-- Choose Denary --</option>
+          <option value="nyeri">Nyeri Denary</option>
+          <option value="othaya">Othaya Denary</option>
+          <option value="karatina">Karatina Denary</option>
+          <option value="mukurweini">Mukurwe-ini Denary</option>
+          <option value="mweiga">Gatarakwa (Mweiga) Denary</option>
+          <option value="tetu">Tetu Denary</option>
+          <option value="naromoru">Narumoru Denary</option>
+          <option value="nanyuki">Nanyuki Denary</option>
+        </select>
+
+        <!-- Parish Dropdown -->
+        <select id="parish" name="parish" required class="selec">
+          <option value="">-- Select Denary First --</option>
+        </select>
+
+        <input type="text" name="local_church" placeholder="Local Church" class="selec" />
+
+        <label for="Education">Select your level of Education:</label>
+        <select id="Education" name="Education" required class="selec">
+          <option value="Secondary">Secondary</option>
+          <option value="Certificate">Certificate</option>
+          <option value="Diploma">Diploma</option>
+          <option value="Degree">Degree</option>
+          <option value="Master's">Master's</option>
+          <option value="PhD">PhD</option>
+        </select>
+
+        <label for="CurrentStatus">Select your current status:</label>
+        <select id="CurrentStatus" name="CurrentStatus" required class="selec">
+          <option value="Student">Student</option>
+          <option value="Employed">Employed</option>
+          <option value="Self-Employed">Self-employed</option>
+        </select>
+
+        <label for="Baptised">Baptised</label>
+        <select id="Baptised" name="Baptised" required class="selec">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <label for="Confirmed">Confirmed</label>
+        <select id="Confirmed" name="Confirmed" required class="selec">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <label for="Gender">Gender</label>
+        <select id="Gender" name="Gender" required class="selec">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+
+        <label for="MaritalStatus">Marital status</label>
+        <select id="MaritalStatus" name="MaritalStatus" required class="selec">
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+        </select>
+
+        <label for="role">Select Role:</label>
+        <select id="role" name="role" required class="selec">
+          <option value="">-- Choose Role --</option>
+          <option value="member">Member</option>
+          <option value="leader">Leader</option>
+        </select>
+
+        <div id="leadershipSection" class="selec" style="display:none;">
+          <label for="level">Level of Leadership:</label>
+          <select id="level" name="level">
+            <option value="">-- Choose Level --</option>
+            <option value="parish">Parish Level</option>
+            <option value="local">Local Level</option>
+          </select>
+        </div>
+
+        <div id="positionSection" class="selec" style="display:none;">
+          <label for="position">Select leadership Position:</label>
+          <select id="position" name="position">
+            <option value="">-- Choose Position --</option>
+          </select>
+        </div>
+
+        <input class="selec" type="tel" id="phone" name="phone" placeholder="Enter phone number"
+               pattern="[\+0-9]{10,15}" maxlength="15"
+               oninput="this.value = this.value.replace(/[^0-9+]/g, '')" required />
+
+        <button class="register" type="submit">Register</button>
+        <p>Already have an account? <a href="#" class="show-login">Login</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Load script at the end so DOM is ready -->
   <script src="script.js"></script>
-
-<div class="container">
-<div class="form-box active" id="login-form">
-<form action="">
-  <h2>Login</h2>
-  <input type="email"name="email" placeholder="email" class="selec">
-  <input type="password"name="password" placeholder="password" class="selec" >
-  <button type="submit" class="Login">Login</button>
-
- <p>Don't have an account?<a href="#" onclick="showform('Register-form')">Register</a></p> 
- 
-</form>
-
-
-
-<div class="form-box " id="Register-form">
-<form action="">
-  <h2>Register</h2>
-  <input type="Name"name="Name" placeholder="Name" class="selec">
-  <input type="Diocese"name="Diocese" placeholder="Diocese"  class="selec">
-  
-
-
-<select id="denary" name="denary" required  class="selec">
-  <option value="nyeri">Nyeri Denary</option>
-  <option value="othaya">Othaya Denary</option>
-  <option value="karatina">Karatina Denary</option>
-  <option value="mukurweini">Mukurwe-ini Denary</option>
-  <option value="mweiga">Gatarakwa (Mweiga) Denary</option>
-  <option value="tetu">Tetu Denary</option>
-  <option value="naromoru">Narumoru Denary</option>
-  <option value="nanyuki">Nanyuki Denary</option>
-</select>
-
-<!-- Parish Dropdown -->
-
-<select id="parish" name="parish" required class="selec">
-  <option value="">-- Select Denary First --</option>
-</select>
-
-<script>
-  // Parish list for each Denary
-  const parishData = {
-    nyeri: [
-      "Our Lady of Consolata Cathedral",
-      "St. Jude Parish",
-      "King'ong'o Parish",
-      "Mwenji Parish",
-      "Kiamuiru Parish",
-      "Mathari Institutions Chaplaincy",
-      "St. Charles Lwanga Parish"
-    ],
-    othaya: [
-      "Othaya Parish",
-      "Kariko Parish",
-      "Birithia Parish",
-      "Karima Parish",
-      "Kagicha Parish",
-      "Karuthi Parish",
-      "Kigumo Parish"
-    ],
-    karatina: [
-      "Karatina Parish",
-      "Miiri Parish",
-      "Giakaibei Parish",
-      "Gikumbo Parish",
-      "Gathugu Parish",
-      "Ngandu Parish",
-      "Kabiru-ini Parish",
-      "Kahira-ini Parish"
-    ],
-    mukurweini: [
-      "Mukurwe-ini Parish",
-      "Kaheti Parish",
-      "Kimondo Parish",
-      "Gikondi Parish"
-    ],
-    mweiga: [
-      "Mweiga Parish",
-      "Endarasha Parish",
-      "Gatarakwa Parish",
-      "Karemeno Parish",
-      "Mugunda Parish",
-      "Sirima Parish",
-      "Winyumiririe Parish",
-      "Kamariki Parish"
-    ],
-    tetu: [
-      "Tetu Parish",
-      "Wamagana Parish",
-      "Kigogo-ini Parish",
-      "Itheguri Parish",
-      "Gititu Parish",
-      "Kagaita Parish",
-      "Giakanja Parish",
-      "Karangia Parish"
-    ],
-    naromoru: [
-      "Narumoru Town Parish",
-      "Irigithathi Parish",
-      "Thegu Parish",
-      "Kiganjo Parish",
-      "Munyu Parish"
-    ],
-    nanyuki: [
-      "Nanyuki Parish",
-      "Dol Dol Parish",
-      "Matanya Parish",
-      "St. Teresa Parish",
-      "Kalalu Parish"
-    ]
-  };
-
-  const denarySelect = document.getElementById("denary");
-  const parishSelect = document.getElementById("parish");
-
-  // Update parish options when denary changes
-  denarySelect.addEventListener("change", function() {
-    const selectedDenary = this.value;
-    parishSelect.innerHTML = ""; // clear old options
-
-    if (selectedDenary && parishData[selectedDenary]) {
-      // Default option
-      const defaultOption = document.createElement("option");
-      defaultOption.text = "-- Choose Parish --";
-      defaultOption.value = "";
-      parishSelect.add(defaultOption);
-
-      // Add parishes
-      parishData[selectedDenary].forEach(parish => {
-        const option = document.createElement("option");
-        option.text = parish;
-        option.value = parish.toLowerCase().replace(/\s+/g, "_");
-        parishSelect.add(option);
-      });
-    } else {
-      const option = document.createElement("option");
-      option.text = "-- Select Denary First --";
-      parishSelect.add(option);
-    }
-  });
-</script>
-
- <input type="Local Church"name="Local Church" placeholder="Local Church" class="selec">
-<label for="Education">Select your level of Education:</label>
-<select id="Education" name="Education" required  class="selec"> 
-
-<option value="Secondary">Secondary</option>
-<option value="Certificate">Certificate</option>
-<option value="Diploma">Diploma</option>
-<option value="Degree">Degree</option>
-<option value="Master's">Master's</option>
-<option value="PhD">PhD</option>
-
-
-
-</select>
-
-
-
-<label for="Current status">Select your your current status:</label>
-<select id="Current status" name="Current status" required  class="selec"> 
-
-<option value="Student">Student</option>
-<option value="Employed">Employed</option>
-<option value="Self-Employed">Self-employed</option>
-
-
-</select>
-
-
-<label for="Baptised">Baptised</label>
-<select id="Baptised" name="Baptised" required  class="selec"> 
-
-<option value="Yes">Yes</option>
-<option value="No">No</option>
-
-</select>
-
-<label for="Confirmed">Confirmed</label>
-<select id="Confirmed" name="Confirmed" required  class="selec"> 
-
-<option value="Yes">Yes</option>
-<option value="No">No</option>
-
-
-
-</select>
-
-
-<label for="Gender">Gender</label>
-<select id="Gender" name="Gender" required  class="selec"> 
-
-<option value="Male">Male</option>
-<option value="Female">Female</option>
-
-
-</select>
-
-<label for="Marital status">Marital status</label>
-<select id="Marital status" name="Marital status" required  class="selec"> 
-
-<option value="Single">Single</option>
-<option value="Married">Married</option>
-
-
-</select>
-
-
- <label for="role">Select Role:</label>
-  <select id="role" name="role" required class="selec" onchange="toggleLeadership()">
-    <option value="">-- Choose Role --</option>
-    <option value="member">Member</option>
-    <option value="leader">Leader</option>
-  </select>
-
-  <!-- Leadership Level (Only visible if role = Leader) -->
-  <div id="leadershipSection" class="selec">
-    <label for="level">Level of Leadership:</label>
-    <select id="level" name="level">
-      <option value="">-- Choose Level --</option>
-      <option value="parish">Parish Level</option>
-      <option value="local">Local Level</option>
-    </select>
-  </div>
-
-  <!-- Leadership Position (depends on Parish or Local) -->
-  <div id="positionSection" class="selec">
-    <label for="position">Select leadership Position:</label>
-    <select id="position" name="position">
-      <option value="">-- Choose Position --</option>
-    </select>
-  </div>
-
-</form>
-
-<script>
-
-
-function toggleLeadership() {
-  const role = document.getElementById("role").value;
-  const leadershipSection = document.getElementById("leadershipSection");
-
-  // Show leadership level only if role is "leader"
-  if (role === "leader") {
-    leadershipSection.style.display = "block";
-     positionSection.style.display = "block";
-    
-  } else {
-    leadershipSection.style.display = "none";
-    positionSection.style.display = "none";
-  }
-}
-
-
-  const roleSelect = document.getElementById('role');
-  const leadershipSection = document.getElementById('leadershipSection');
-  const positionSection = document.getElementById('positionSection');
-  const levelSelect = document.getElementById('level');
-  const positionSelect = document.getElementById('position');
-
-  const parishPositions = [
-    "Parish Coordinator",
-    "Parish vice coordinator ",
-    "Parish Secretary",
-    "Parish vice secretary",
-    "Parish Treasurer",
-    "Parish litergist",
-    "Parish vice litergist",
-     "Parish organing secretary",
-     "Parish games captain",
-    "Parish Disciplinarian"
-  ];
-
-  const localPositions = [
-    "Local Coordinator",
-     "Local vice coordinator",
-    "Local Secretary",
-     "Local vice secretary",
-    "Local litergist",
-    "Local vice litergist",
-     "Local organing secretary",
-     "Local games captain",
-    "Local Disciplinarian"
-  ];
-
-
-  // Show leadership section when 'Leader' is selected
-  roleSelect.addEventListener('change', function() {
-    if (this.value === 'leader') {
-      leadershipSection.classList.remove('hidden');
-    } else {
-      leadershipSection.classList.add('hidden');
-      positionSection.classList.add('hidden');
-    }
-  });
-
-  // Show positions based on selected level
-  levelSelect.addEventListener('change', function() {
-    positionSelect.innerHTML = '<option value="">-- Choose Position --</option>';
-    if (this.value === 'parish') {
-      parishPositions.forEach(pos => {
-        const option = document.createElement('option');
-        option.value = pos.toLowerCase().replace(/\s+/g, '-');
-        option.textContent = pos;
-        positionSelect.appendChild(option);
-      });
-      positionSection.classList.remove('hidden');
-    } else if (this.value === 'local') {
-      localPositions.forEach(pos => {
-        const option = document.createElement('option');
-        option.value = pos.toLowerCase().replace(/\s+/g, '-');
-        option.textContent = pos;
-        positionSelect.appendChild(option);
-      });
-      positionSection.classList.remove('hidden');
-    } else {
-      positionSection.classList.add('hidden');
-    }
-  });
-
-
-</script>
-<input class="selec" type="tel" id="phone" name="phone" placeholder="Enter phone number"
-       pattern="[0+9]{10,15}" maxlength="15"
-       oninput="this.value = this.value.replace(/[^0-9+]/g, '')"required>
-
-<button class="register" type="submit">Register</button>
-<p>Already have an account?<a href="#" onclick="showform('login-form')">Login</a></p> 
-</form>
-
-
-</div>
-</div>
-<script>
-
-
-</script>
-
 </body>
 </html>
