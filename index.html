@@ -5,6 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nyeri Catholic Computerized System</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Small override CSS to center the forms on mobile and laptop screens -->
+  <style>
+    /* Ensure the page fills the viewport and remove default body margin */
+    html, body {
+      height: 100%;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    /* Center content both horizontally and vertically */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;      /* horizontal centering */
+      justify-content: center;  /* vertical centering */
+      padding: 20px;
+      min-height: 100vh;        /* full viewport height so vertical centering works */
+    }
+
+    /* Constrain the form container width so forms are nicely centered on wide screens */
+    .container {
+      width: 100%;
+      max-width: 460px; /* controls how wide the forms get on laptops */
+    }
+
+    /* Make each form-box fill the container width */
+    .form-box {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Ensure the form elements stack nicely inside the form-box */
+    .form-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Center the small paragraph/action links inside forms */
+    .form-box p {
+      margin: 10px 0 0;
+      text-align: center;
+    }
+
+    /* Slight padding tweak for very small screens */
+    @media (max-width: 420px) {
+      .container {
+        padding: 0 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <h1>Welcome to Nyeri Catholic Computerized System</h1>
