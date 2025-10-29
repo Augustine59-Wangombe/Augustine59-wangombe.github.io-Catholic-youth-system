@@ -159,36 +159,58 @@ const analytics = getAnalytics(app);
 import { getFirestore, collection, addDoc } 
   from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
+// Initialize Firestore
 const db = getFirestore(app);
-const registrationForm = document.getElementById("registration-form");
+
+// Select your registration form
+const registrationForm = document.querySelector("form"); // your site has only one form visible at a time
 
 registrationForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const fullName = document.getElementById("fullName").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-  const role = document.getElementById("role").value;
-  const leadershipLevel = document.getElementById("leadershipLevel")?.value || "N/A";
-  const gender = document.getElementById("gender").value;
-  const parish = document.getElementById("parish").value;
+
+  // Collect field values (adjusted to your form)
+  const denary = document.getElementById("denary")?.value || "";
+  const educationLevel = document.getElementById("educationLevel")?.value || "";
+  const currentStatus = document.getElementById("status")?.value || "";
+  const baptised = document.getElementById("baptised")?.value || "";
+  const confirmed = document.getElementById("confirmed")?.value || "";
+  const gender = document.getElementById("gender")?.value || "";
+  const maritalStatus = document.getElementById("maritalStatus")?.value || "";
+  const role = document.getElementById("role")?.value || "";
+  const leadershipLevel = document.getElementById("leadershipLevel")?.value || "";
+  const leadershipPosition = document.getElementById("leadershipPosition")?.value || "";
 
   try {
+    // Save to Firestore
     await addDoc(collection(db, "registrations"), {
-      fullName, email, phone, role, leadershipLevel, gender, parish, createdAt: new Date()
+      denary,
+      educationLevel,
+      currentStatus,
+      baptised,
+      confirmed,
+      gender,
+      maritalStatus,
+      role,
+      leadershipLevel,
+      leadershipPosition,
+      createdAt: new Date()
     });
+
     alert("✅ Registration successful!");
     registrationForm.reset();
   } catch (error) {
-    console.error("Error adding document: ", error);
-    alert("Error saving registration.");
+    console.error("❌ Error saving registration:", error);
+    alert("Error saving registration. Check console for details.");
   }
 });
+ 
 
 </script>
   <!-- Load script at the end so DOM is ready -->
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
