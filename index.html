@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nyeri Catholic Computerized System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h3><center>Welcome to Nyeri Catholic Youth System</center></h3>
+
+  <div class="container">
+    <!-- Login box -->
+    <div class="form-box active" id="login-form">
+      <form id="loginForm" action="">
+        <h2>Login</h2>
+        <input type="email" name="email" placeholder="email" class="selec" required />
+        <input type="password" name="password" placeholder="password" class="selec" required />
+        <button type="submit" class="Login">Login</button>
+        <p>Don't have an account? <a href="#" class="show-register">Register</a></p>
+      </form>
+    </div>
+
+
+    <!-- Register box -->
+    <div class="form-box" id="register-form">
+      <form id="registerForm" action="">
+        <h2>Register</h2>
+
+        <input type="text" name="name" placeholder="Name" class="selec" required />
+        <input type="text" name="diocese" placeholder="Diocese" class="selec" required />
+
+        <select id="denary" name="denary" required class="selec">
+          <option value="">-- Choose Denary --</option>
+          <option value="nyeri">Nyeri Denary</option>
+          <option value="othaya">Othaya Denary</option>
+          <option value="karatina">Karatina Denary</option>
+          <option value="mukurweini">Mukurwe-ini Denary</option>
+          <option value="mweiga">Gatarakwa (Mweiga) Denary</option>
+          <option value="tetu">Tetu Denary</option>
+          <option value="naromoru">Narumoru Denary</option>
+          <option value="nanyuki">Nanyuki Denary</option>
+        </select>
+
+        <!-- Parish Dropdown -->
+        <select id="parish" name="parish" required class="selec">
+          <option value="">-- Select Denary First --</option>
+        </select>
+
+        <input type="text" name="local_church" placeholder="Local Church" class="selec" />
+
+        <label for="Education">Select your level of Education:</label>
+        <select id="Education" name="Education" required class="selec">
+          <option value="Secondary">Secondary</option>
+          <option value="Certificate">Certificate</option>
+          <option value="Diploma">Diploma</option>
+          <option value="Degree">Degree</option>
+          <option value="Master's">Master's</option>
+          <option value="PhD">PhD</option>
+        </select>
+
+        <label for="CurrentStatus">Select your current status:</label>
+        <select id="CurrentStatus" name="CurrentStatus" required class="selec">
+          <option value="Student">Student</option>
+          <option value="Employed">Employed</option>
+          <option value="Self-Employed">Self-employed</option>
+        </select>
+
+        <label for="Baptised">Baptised</label>
+        <select id="Baptised" name="Baptised" required class="selec">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <label for="Confirmed">Confirmed</label>
+        <select id="Confirmed" name="Confirmed" required class="selec">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+
+        <label for="Gender">Gender</label>
+        <select id="Gender" name="Gender" required class="selec">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+
+        <label for="MaritalStatus">Marital status</label>
+        <select id="MaritalStatus" name="MaritalStatus" required class="selec">
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+        </select>
+
+
+<label for="Different abled">Different abled</label>
+        <select id="Different abled" name="Different abled" required class="selec">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+
+        <label for="role">Select Role:</label>
+        <select id="role" name="role" required class="selec">
+          <option value="">-- Choose Role --</option>
+          <option value="member">Member</option>
+          <option value="leader">Leader</option>
+        </select>
+
+        <div id="leadershipSection" class="selec" style="display:none;">
+          <label for="level">Level of Leadership:</label>
+          <select id="level" name="level">
+            <option value="">-- Choose Level --</option>
+            <option value="parish">Parish Level</option>
+            <option value="local">Local Level</option>
+          </select>
+        </div>
+
+        <div id="positionSection" class="selec" style="display:none;">
+          <label for="position">Select leadership Position:</label>
+          <select id="position" name="position">
+            <option value="">-- Choose Position --</option>
+          </select>
+        </div>
+
+        <input class="selec" type="tel" id="phone" name="phone" placeholder="Enter phone number"
+               pattern="[\+0-9]{10,15}" maxlength="15"
+               oninput="this.value = this.value.replace(/[^0-9+]/g, '')" required />
+
+        <button class="register" type="submit">Register</button>
+        <p>Already have an account? <a href="#" class="show-login">Login</a></p>
+      </form>
+    </div>
+  </div>
+<script type="module">
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC__eLHRoRjOd2tWT9ON24CNEgHZt0EXVo",
+  authDomain: "nyeri-catholic-youth-app-d8c06.firebaseapp.com",
+  projectId: "nyeri-catholic-youth-app-d8c06",
+  storageBucket: "nyeri-catholic-youth-app-d8c06.firebasestorage.app",
+  messagingSenderId: "941187767211",
+  appId: "1:941187767211:web:743397821f978cfb0750ee",
+  measurementId: "G-YY616N1CJX"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+
+</script>
+  <!-- Load script at the end so DOM is ready -->
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
