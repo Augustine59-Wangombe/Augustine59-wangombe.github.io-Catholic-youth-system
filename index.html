@@ -130,12 +130,36 @@
       </form>
     </div>
   </div>
+<script>
+  // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAeKFby7DVFy80702igVrqN-dauNiK-C_Q",
+  authDomain: "nyeri-catholic-youth-app.firebaseapp.com",
+  databaseURL: "https://nyeri-catholic-youth-app-default-rtdb.firebaseio.com",
+  projectId: "nyeri-catholic-youth-app",
+  storageBucket: "nyeri-catholic-youth-app.firebasestorage.app",
+  messagingSenderId: "2807748399",
+  appId: "1:2807748399:web:b551cf8867b11f177bb3da",
+  measurementId: "G-SKECTS72EM"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+</script>
 
   <!-- Load script at the end so DOM is ready -->
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
