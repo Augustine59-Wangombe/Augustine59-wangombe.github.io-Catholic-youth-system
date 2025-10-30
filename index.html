@@ -131,87 +131,14 @@
     </div>
   </div>
   
-<script type="module">
-  // Firebase SDK imports
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
-  // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyC__eLHRoRjOd2tWT9ON24CNEgHZt0EXVo",
-    authDomain: "nyeri-catholic-youth-app-d8c06.firebaseapp.com",
-    projectId: "nyeri-catholic-youth-app-d8c06",
-    storageBucket: "nyeri-catholic-youth-app-d8c06.firebasestorage.app",
-    messagingSenderId: "941187767211",
-    appId: "1:941187767211:web:743397821f978cfb0750ee",
-    measurementId: "G-YY616N1CJX"
-  };
-
-  // Initialize Firebase & Firestore
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getFirestore(app);
-
-  // Select the registration form
-  const registrationForm = document.getElementById("registerForm");
-
-  registrationForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    // Collect field values (IDs match your HTML exactly)
-    const name = document.querySelector('input[name="name"]').value.trim();
-    const diocese = document.querySelector('input[name="diocese"]').value.trim();
-    const denary = document.getElementById("denary").value;
-    const parish = document.getElementById("parish").value;
-    const localChurch = document.querySelector('input[name="local_church"]').value.trim();
-    const educationLevel = document.getElementById("Education").value;
-    const currentStatus = document.getElementById("CurrentStatus").value;
-    const baptised = document.getElementById("Baptised").value;
-    const confirmed = document.getElementById("Confirmed").value;
-    const gender = document.getElementById("Gender").value;
-    const maritalStatus = document.getElementById("MaritalStatus").value;
-    const differentAbled = document.getElementById("Different abled").value;
-    const role = document.getElementById("role").value;
-    const leadershipLevel = document.getElementById("level").value;
-    const leadershipPosition = document.getElementById("position").value;
-    const phone = document.getElementById("phone").value.trim();
-
-    try {
-      // Save to Firestore
-      await addDoc(collection(db, "registrations"), {
-        name,
-        diocese,
-        denary,
-        parish,
-        localChurch,
-        educationLevel,
-        currentStatus,
-        baptised,
-        confirmed,
-        gender,
-        maritalStatus,
-        differentAbled,
-        role,
-        leadershipLevel,
-        leadershipPosition,
-        phone,
-        createdAt: new Date()
-      });
-
-      alert("✅ Registration successful!");
-      registrationForm.reset();
-    } catch (error) {
-      console.error("❌ Error saving registration:", error);
-      alert("Error saving registration. Check console for details.");
-    }
-  });
 </script>
 
   <!-- Load script at the end so DOM is ready -->
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
