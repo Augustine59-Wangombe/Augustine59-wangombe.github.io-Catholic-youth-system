@@ -125,6 +125,12 @@
                pattern="[\+0-9]{10,15}" maxlength="15"
                oninput="this.value = this.value.replace(/[^0-9+]/g, '')" required />
 
+
+      <input type="password" name="password" placeholder="Create password" class="selec" required />
+
+
+
+        
         <button class="register" type="submit">Register</button>
         <p>Already have an account? <a href="#" class="show-login">Login</a></p>
       </form>
@@ -172,6 +178,7 @@
       level: document.getElementById("level").value,
       position: document.getElementById("position").value,
       phone: document.getElementById("phone").value,
+      password: document.querySelector('input[name="password"]').value,
       timestamp: new Date()
     };
 
@@ -192,6 +199,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
