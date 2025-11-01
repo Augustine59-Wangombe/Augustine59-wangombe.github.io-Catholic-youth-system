@@ -1,27 +1,25 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAeKFby7DVFy80702igVrqN-dauNiK-C_Q",
+  apiKey: "AIzaSyAeKby7DVfy8070ZjgVRqN-dauNiK_CrQ",
   authDomain: "nyeri-catholic-youth-app.firebaseapp.com",
   databaseURL: "https://nyeri-catholic-youth-app-default-rtdb.firebaseio.com",
   projectId: "nyeri-catholic-youth-app",
-  storageBucket: "nyeri-catholic-youth-app.firebasestorage.app",
+  storageBucket: "nyeri-catholic-youth-app.appspot.com",
   messagingSenderId: "2807748399",
-  appId: "1:2807748399:web:a33abb5ea33a2d387bb3da",
-  measurementId: "G-9HRL1S4BDP"
+  appId: "1:2807748399:web:a33bb5ea33a2ad87bb3da",
+  measurementId: "G-9HRL154BDP"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app); 
+const analytics = getAnalytics(app);
+const db = getFirestore(app); // ✅ Initialize Firestore here
 
-// ✅ Confirm Firebase connection in console
 console.log("✅ Firebase successfully initialized and Firestore is ready!");
 
 // Handle registration form submission
@@ -31,17 +29,14 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
   const data = {
     name: document.querySelector('input[name="name"]').value,
     diocese: document.querySelector('input[name="diocese"]').value,
-    denary: document.getElementById("denary").value,
+    deanary: document.getElementById("deanary").value,
     parish: document.getElementById("parish").value,
-    local_church: document.querySelector('input[name="local_church"]').value,
+    local_church: document.getElementById("local_church").value,
     Education: document.getElementById("Education").value,
-    CurrentStatus: document.getElementById("CurrentStatus").value,
     Baptised: document.getElementById("Baptised").value,
-    Confirmed: document.getElementById("Confirmed").value,
     Gender: document.getElementById("Gender").value,
-    MaritalStatus: document.getElementById("MaritalStatus").value,
-    DifferentAbled: document.getElementById("Different-abled").value,
-    role: document.getElementById("role").value,
+    maritalStatus: document.getElementById("maritalStatus").value,
+    Different_abled: document.getElementById("Different-abled").value,
     level: document.getElementById("level").value,
     position: document.getElementById("position").value,
     phone: document.getElementById("phone").value,
@@ -59,5 +54,3 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     alert("Error saving registration. Check console for details.");
   }
 });
-
-
