@@ -131,86 +131,68 @@
     </div>
   </div>
 <!-- … your existing registration form HTML … -->
-
 <script type="module">
-  
-  
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+  // Import Firebase SDKs
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAeKFby7DVFy80702igVrqN-dauNiK-C_Q",
-  authDomain: "nyeri-catholic-youth-app.firebaseapp.com",
-  databaseURL: "https://nyeri-catholic-youth-app-default-rtdb.firebaseio.com",
-  projectId: "nyeri-catholic-youth-app",
-  storageBucket: "nyeri-catholic-youth-app.firebasestorage.app",
-  messagingSenderId: "2807748399",
-  appId: "1:2807748399:web:be188cd566aeb5a77bb3da",
-  measurementId: "G-JBFJ3Q968Y"
-};
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAeKFby7DVFy80702igVrqN-dauNiK-C_Q",
+    authDomain: "nyeri-catholic-youth-app.firebaseapp.com",
+    projectId: "nyeri-catholic-youth-app",
+    storageBucket: "nyeri-catholic-youth-app.firebasestorage.app",
+    messagingSenderId: "2807748399",
+    appId: "1:2807748399:web:be188cd566aeb5a77bb3da",
+    measurementId: "G-JBFJ3Q968Y"
+  };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-  
-  
-  
-  
-  
-  
-  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-  
-   // 4. Listen for form submit and save data
-  document.getElementById("registrationForm").addEventListener("submit", async (e) => {
+  // Save data to Firestore on form submit
+  document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const denary = document.getElementById("denary").value;
-    const educationLevel = document.getElementById("educationLevel").value;
-    const status = document.getElementById("status").value;
-    const baptised = document.querySelector('input[name="baptised"]:checked').value;
-    const confirmed = document.querySelector('input[name="confirmed"]:checked').value;
-    const gender = document.querySelector('input[name="gender"]:checked').value;
-    const maritalStatus = document.getElementById("maritalStatus").value;
-    const differentAbled = document.querySelector('input[name="differentAbled"]:checked').value;
-    const role = document.getElementById("role").value;
-    const leadershipLevel = document.getElementById("leadershipLevel").value;
-    const leadershipPosition = document.getElementById("leadershipPosition").value;
+    const data = {
+      name: document.querySelector('input[name="name"]').value,
+      diocese: document.querySelector('input[name="diocese"]').value,
+      denary: document.getElementById("denary").value,
+      parish: document.getElementById("parish").value,
+      local_church: document.querySelector('input[name="local_church"]').value,
+      Education: document.getElementById("Education").value,
+      CurrentStatus: document.getElementById("CurrentStatus").value,
+      Baptised: document.getElementById("Baptised").value,
+      Confirmed: document.getElementById("Confirmed").value,
+      Gender: document.getElementById("Gender").value,
+      MaritalStatus: document.getElementById("MaritalStatus").value,
+      DifferentAbled: document.getElementById("Different abled").value,
+      role: document.getElementById("role").value,
+      level: document.getElementById("level").value,
+      position: document.getElementById("position").value,
+      phone: document.getElementById("phone").value,
+      timestamp: new Date()
+    };
 
     try {
-      await addDoc(collection(db, "registrations"), {
-        denary,
-        educationLevel,
-        status,
-        baptised,
-        confirmed,
-        gender,
-        maritalStatus,
-        differentAbled,
-        role,
-        leadershipLevel,
-        leadershipPosition,
-        timestamp: new Date()
-      });
+      await addDoc(collection(db, "registrations"), data);
       alert("Registration saved successfully!");
-      document.getElementById("registrationForm").reset();
+      e.target.reset();
     } catch (error) {
       console.error("Error saving registration:", error);
-      alert("Error saving registration. See console for details.");
+      alert("Error saving registration. Check console for details.");
     }
   });
 </script>
+
 
 
   <!-- Load script at the end so DOM is ready -->
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
