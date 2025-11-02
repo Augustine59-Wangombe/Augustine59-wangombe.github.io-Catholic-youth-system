@@ -33,6 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
         local_church: form.local_church?.value || "",
         Education: form.Education?.value || "",
         Baptised: form.Baptised?.value || "",
+        Confirmed: form.Confirmed?. value || "",
         Gender: form.Gender?.value || "",
         maritalStatus: form.maritalStatus?.value || "",
         Different_abled: form["Different-abled"]?.value || "",
@@ -52,4 +53,5 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
