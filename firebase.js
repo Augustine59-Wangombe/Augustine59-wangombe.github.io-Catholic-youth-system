@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    try {
+    try { const getVal = (id) => form.querySelector(`#${id}`)?.value || "";
       const data = {
         name: form.name?.value || "",
         diocese: form.diocese?.value || "",
@@ -52,3 +52,4 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
