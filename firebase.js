@@ -32,12 +32,13 @@ window.addEventListener("DOMContentLoaded", () => {
         parish: form.parish?.value || "",
         local_church: form.local_church?.value || "",
         Education: form.Education?.value || "",
+        CurrentStatus: form.CurrentStatus?.value ||"",
         Baptised: form.Baptised?.value || "",
         Confirmed: form.Confirmed?. value || "",
         Gender: form.Gender?.value || "",
         maritalStatus: form.maritalStatus?.value || "",
         Different_abled: form["Different-abled"]?.value || "",
-        level: form.level?.value || "",
+        role: form:role?.value || "",
         position: form.position?.value || "",
         phone: form.phone?.value || "",
         password: form.password?.value || "",
@@ -53,5 +54,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
