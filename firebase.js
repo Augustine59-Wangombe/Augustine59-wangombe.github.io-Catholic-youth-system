@@ -28,17 +28,17 @@ window.addEventListener("DOMContentLoaded", () => {
       const data = {
         name: form.name?.value || "",
         diocese: form.diocese?.value || "",
-        deanary: form.deanary?.value || "",
+        Denary: form.Denary?.value || "",
         parish: form.parish?.value || "",
         local_church: form.local_church?.value || "",
         Education: form.Education?.value || "",
-        CurrentStatus: form.CurrentStatus?.value ||"",
+        Current-Status: form.["Current-Status"]?.value ||"",
         Baptised: form.Baptised?.value || "",
         Confirmed: form.Confirmed?. value || "",
         Gender: form.Gender?.value || "",
-        maritalStatus: form.Marital Status?.value || "",
+        Marital-Status: form.["Marital-Status"]?.value || "",
         Different_abled: form["Different-abled"]?.value || "",
-        role: form:role?.value || "",
+        role: form.role?.value || "",
         position: form.position?.value || "",
         phone: form.phone?.value || "",
         password: form.password?.value || "",
@@ -54,6 +54,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
