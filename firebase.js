@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const data = {
         name: form.name?.value || "",
         diocese: form.diocese?.value || "",
-        Denary: form.Denary?.value || "",
+        denary: form.denary?.value || "",
         parish: form.parish?.value || "",
         local_church: form.local_church?.value || "",
         Education: form.Education?.value || "",
@@ -55,6 +55,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
