@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", () => {
         Baptised: form.Baptised?.value || "",
         Confirmed: form.Confirmed?. value || "",
         Gender: form.Gender?.value || "",
-        maritalStatus: form.maritalStatus?.value || "",
+        maritalStatus: form.Marital status?.value || "",
         Different_abled: form["Different-abled"]?.value || "",
         role: form:role?.value || "",
         position: form.position?.value || "",
@@ -54,6 +54,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
