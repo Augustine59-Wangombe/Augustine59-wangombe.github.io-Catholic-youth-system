@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
         Marital_Status: form["Marital-Status"]?.value || "",
         Different_abled: form["Different-abled"]?.value || "",
         role: form.role?.value || "",
-        level: form.leve?.value || "",
+        level: form.level?.value || "",
         position: form.position?.value || "",
         phone: form.phone?.value || "",
         password: form.password?.value || "",
@@ -55,6 +55,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
