@@ -4,7 +4,7 @@
   height: auto;
   width:100%;
   max-width:1200%;
-
+}
 
 /* Center the forms vertically and horizontally and style them */
 * { box-sizing: border-box; }
@@ -99,6 +99,7 @@ button {
   .form-box { width: 100%; padding: 18px; border-radius: 8px; }
   .container { padding: 12px; }
 }
+
 
 
 
