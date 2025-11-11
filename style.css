@@ -35,11 +35,12 @@ h3 {
   align-items: flex-start;
   width: 100%;
   min-height: 100vh;
+  padding-top:100px;
 }
 
 /* Form box design */
 .form-box {
-  width:380px;
+  width:420px;
   background: #ffffff;
   padding:24px;
   border-radius: 10px;
@@ -123,5 +124,6 @@ a:hover {
     padding: 25px;
   }
   }
+
 
 
