@@ -39,14 +39,15 @@ h3 {
 
 /* Form box design */
 .form-box {
-  width: 400px;
+  width:380px;
   background: #ffffff;
-  padding-top:100px;
-  border-radius: 20px;
+  padding:24px;
+  border-radius: 10px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   position: relative;
   top: -100px; /* brings form closer to your image */
   transition: all 0.4s ease-in-out;
+  display: none;
 }
 
 /* Active and hidden forms */
@@ -122,4 +123,5 @@ a:hover {
     padding: 25px;
   }
   }
+
 
