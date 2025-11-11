@@ -1,3 +1,13 @@
+.img1{
+  height: auto;
+  max-width:1200%;
+  width:100%
+}
+
+
+
+
+
 body {
   margin: 0;
   padding: 0;
@@ -8,12 +18,7 @@ body {
   align-items: center;
 }
 
-/* Keep your existing img1 styling as it is */
-.img1 {height: auto;
-       max-width:1200%
-       width:100%
-  /* your original properties stay here */
-}
+
 
 /* Welcome heading */
 h3 {
@@ -36,7 +41,7 @@ h3 {
 .form-box {
   width: 400px;
   background: #ffffff;
-  padding: 30px 35px;
+  padding-top:100px;
   border-radius: 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -117,3 +122,4 @@ a:hover {
     padding: 25px;
   }
   }
+
