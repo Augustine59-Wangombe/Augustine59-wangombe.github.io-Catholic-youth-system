@@ -1,112 +1,119 @@
-
-
-.img1{
-  height: auto;
-  width:100%;
-  max-width:1200%;
-}
-
-/* Center the forms vertically and horizontally and style them */
-* { box-sizing: border-box; }
-html, body {
-  height: 100%;
+body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: #f4f6f8;
-  color: #222;
-}
-
-/* Make the container fill the viewport and center its content */
-.container {
-  min-height: 100vh;                 /* full viewport height */
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #f5f6fa;
   display: flex;
-  align-items: center;               /* vertical center */
-  justify-content: center;           /* horizontal center */
-  padding: 24px;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Form boxes */
-.form-box {
+/* Keep your existing img1 styling as it is */
+.img1 {height: auto;
+       max-width:1200%
+       width:100%
+  /* your original properties stay here */
+}
+
+/* Welcome heading */
+h3 {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Container for both forms */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
-  max-width: 1200%;
-  height: auto;
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
-  transition: transform .18s ease, opacity .18s ease;
-  transform: translateY(6px);
-  opacity: 0;
-  display: none;                      /* hidden by default */
+  min-height: 100vh;
 }
 
-/* Active form visible and centered */
+/* Form box design */
+.form-box {
+  width: 400px;
+  background: #ffffff;
+  padding: 30px 35px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: -100px; /* brings form closer to your image */
+  transition: all 0.4s ease-in-out;
+}
+
+/* Active and hidden forms */
 .form-box.active {
   display: block;
-  transform: translateY(0);
-  opacity: 1;
+}
+.form-box:not(.active) {
+  display: none;
 }
 
-/* Heading */
+/* Headings inside forms */
 .form-box h2 {
-  margin: 0 0 12px;
   text-align: center;
-  font-size: 20px;
-  letter-spacing: .2px;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-/* Inputs, selects, buttons */
-.selec, input[type="text"], input[type="email"], input[type="password"], input[type="tel"], select {
+/* Input fields and selects */
+.selec {
   width: 100%;
-  padding: 10px 12px;
-  margin: 8px 0;
-  border: 1px solid #d9e0e8;
-  border-radius: 6px;
-  font-size: 14px;
-  background: #fafbfc;
-}
-
-button {
-  width: 100%;
-  padding: 10px 14px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 6px;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
   font-size: 15px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.selec:focus {
+  border: 1px solid #007bff;
+}
+
+/* Buttons */
+.Login,
+.register {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 16px;
   cursor: pointer;
-  background: #1565d8;
-  color: #fff;
+  transition: background-color 0.3s;
 }
 
-/* Small helper text / links */
-.form-box p {
+.Login:hover,
+.register:hover {
+  background-color: #0056b3;
+}
+
+/* Links and text */
+p {
   text-align: center;
-  margin: 12px 0 0;
-  font-size: 13px;
+  font-size: 14px;
 }
-.form-box a {
-  color: #1565d8;
+
+a {
+  color: #007bff;
   text-decoration: none;
-  margin-left: 6px;
 }
 
-/* Leadership/position sections alignment (they can be hidden) */
-#leadershipSection, #positionSection {
-  margin-top: 6px;
+a:hover {
+  text-decoration: underline;
 }
 
-/* Responsive: reduce width on narrow screens */
-@media (max-width: 420px) {
-  .form-box { width: 100%; padding: 18px; border-radius: 8px; }
-  .container { padding: 12px; }
-}
-
-
-
-
-
-
-
-
-
-
+/* Responsive for mobile */
+@media screen and (max-width: 480px) {
+  .form-box {
+    width: 90%;
+    top: -70px;
+    padding: 25px;
+  }
+  }
