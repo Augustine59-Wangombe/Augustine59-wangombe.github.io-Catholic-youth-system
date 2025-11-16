@@ -49,6 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       await addDoc(collection(db, "registrations"), data);
       alert("✅ Registration saved successfully!");
+         window.location.href="Youths dashboard.html";
       form.reset();
     } catch (error) {
       console.error("❌ Error saving registration:", error);
@@ -56,6 +57,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
