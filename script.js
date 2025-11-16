@@ -1,3 +1,4 @@
+
 // -----------------------
 // SHOW FORM FUNCTION
 // -----------------------
@@ -20,11 +21,16 @@ window.registerUser = function() {
   const level = document.getElementById("level").value;
   const position = document.getElementById("position").value;
 
+  if (!fullName || !email || !password) {
+    alert("Please fill all required fields.");
+    return;
+  }
+
   auth.createUserWithEmailAndPassword(email, password)
     .then(userCred => {
       const user = userCred.user;
 
-      // Save extra user info in Firestore
+      // Save extra info in Firestore
       return db.collection("users").doc(user.uid).set({
         uid: user.uid,
         fullName,
@@ -38,7 +44,7 @@ window.registerUser = function() {
       });
     })
     .then(() => {
-      alert("Registration successful. Please login with the same email and password.");
+      alert("Registration successful. Please login with your email and password.");
       showform("login-form");
     })
     .catch(error => {
@@ -58,6 +64,11 @@ window.loginUser = function() {
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
 
+  if (!email || !password) {
+    alert("Please enter email and password.");
+    return;
+  }
+
   auth.signInWithEmailAndPassword(email, password)
     .then(userCred => {
       const user = userCred.user;
@@ -66,7 +77,9 @@ window.loginUser = function() {
       db.collection("users").doc(user.uid).get()
         .then(doc => {
           if (doc.exists) {
-            // Save login state
+            console.log("Login successful:", email);
+
+            // Save login state locally
             localStorage.setItem("loggedIn", "true");
             localStorage.setItem("userEmail", email);
 
@@ -76,9 +89,14 @@ window.loginUser = function() {
             alert("No user record found. Please register first.");
             showform("register-form");
           }
+        })
+        .catch(err => {
+          console.error("Firestore error:", err);
+          alert("Error fetching user data. Try again.");
         });
     })
     .catch(error => {
+      console.error("Login error:", error);
       if (error.code === "auth/user-not-found") {
         alert("Account does not exist. Please register.");
         showform("register-form");
@@ -91,30 +109,9 @@ window.loginUser = function() {
 };
 
 // -----------------------
-// LOGOUT FUNCTION
-// -----------------------
-window.logoutUser = function() {
-  auth.signOut()
-    .then(() => {
-      localStorage.removeItem("loggedIn");
-      localStorage.removeItem("userEmail");
-      alert("You have successfully logged out.");
-      window.location.href = "index.html";
-    })
-    .catch(error => {
-      console.error("Logout Error:", error.message);
-    });
-};
-
-// -----------------------
 // PAGE LOAD EVENTS
 // -----------------------
 document.addEventListener('DOMContentLoaded', function() {
-
-  // Auto redirect if user already logged in
-  if (localStorage.getItem("loggedIn") === "true") {
-    window.location.href = "Youths dashboard.html";
-  }
 
   // CLICK LINKS FOR LOGIN/REGISTER
   const showRegisterLinks = document.querySelectorAll('.show-register');
@@ -137,74 +134,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // DENARY → PARISH LOGIC
   // -----------------------
   const parishData = {
-    nyeri: [
-      "Our Lady of Consolata Cathedral",
-      "St. Jude Parish",
-      "King'ong'o Parish",
-      "Mwenji Parish",
-      "Kiamuiru Parish",
-      "Mathari Institutions Chaplaincy",
-      "St. Charles Lwanga Parish"
-    ],
-    othaya: [
-      "Othaya Parish",
-      "Kariko Parish",
-      "Birithia Parish",
-      "Karima Parish",
-      "Kagicha Parish",
-      "Karuthi Parish",
-      "Kigumo Parish"
-    ],
-    karatina: [
-      "Karatina Parish",
-      "Miiri Parish",
-      "Giakaibei Parish",
-      "Gikumbo Parish",
-      "Gathugu Parish",
-      "Ngandu Parish",
-      "Kabiru-ini Parish",
-      "Kahira-ini Parish"
-    ],
-    mukurweini: [
-      "Mukurwe-ini Parish",
-      "Kaheti Parish",
-      "Kimondo Parish",
-      "Gikondi Parish"
-    ],
-    mweiga: [
-      "Mweiga Parish",
-      "Endarasha Parish",
-      "Gatarakwa Parish",
-      "Karemeno Parish",
-      "Mugunda Parish",
-      "Sirima Parish",
-      "Winyumiririe Parish",
-      "Kamariki Parish"
-    ],
-    tetu: [
-      "Tetu Parish",
-      "Wamagana Parish",
-      "Kigogo-ini Parish",
-      "Itheguri Parish",
-      "Gititu Parish",
-      "Kagaita Parish",
-      "Giakanja Parish",
-      "Karangia Parish"
-    ],
-    naromoru: [
-      "Narumoru Town Parish",
-      "Irigithathi Parish",
-      "Thegu Parish",
-      "Kiganjo Parish",
-      "Munyu Parish"
-    ],
-    nanyuki: [
-      "Nanyuki Parish",
-      "Dol Dol Parish",
-      "Matanya Parish",
-      "St. Teresa Parish",
-      "Kalalu Parish"
-    ]
+    nyeri: ["Our Lady of Consolata Cathedral","St. Jude Parish","King'ong'o Parish","Mwenji Parish","Kiamuiru Parish","Mathari Institutions Chaplaincy","St. Charles Lwanga Parish"],
+    othaya: ["Othaya Parish","Kariko Parish","Birithia Parish","Karima Parish","Kagicha Parish","Karuthi Parish","Kigumo Parish"],
+    karatina: ["Karatina Parish","Miiri Parish","Giakaibei Parish","Gikumbo Parish","Gathugu Parish","Ngandu Parish","Kabiru-ini Parish","Kahira-ini Parish"],
+    mukurweini: ["Mukurwe-ini Parish","Kaheti Parish","Kimondo Parish","Gikondi Parish"],
+    mweiga: ["Mweiga Parish","Endarasha Parish","Gatarakwa Parish","Karemeno Parish","Mugunda Parish","Sirima Parish","Winyumiririe Parish","Kamariki Parish"],
+    tetu: ["Tetu Parish","Wamagana Parish","Kigogo-ini Parish","Itheguri Parish","Gititu Parish","Kagaita Parish","Giakanja Parish","Karangia Parish"],
+    naromoru: ["Narumoru Town Parish","Irigithathi Parish","Thegu Parish","Kiganjo Parish","Munyu Parish"],
+    nanyuki: ["Nanyuki Parish","Dol Dol Parish","Matanya Parish","St. Teresa Parish","Kalalu Parish"]
   };
 
   const denarySelect = document.getElementById("denary");
@@ -245,30 +182,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const levelSelect = document.getElementById('level');
   const positionSelect = document.getElementById('position');
 
-  const parishPositions = [
-    "Parish Coordinator",
-    "Parish vice coordinator",
-    "Parish Secretary",
-    "Parish vice secretary",
-    "Parish Treasurer",
-    "Parish litergist",
-    "Parish vice litergist",
-    "Parish organing secretary",
-    "Parish games captain",
-    "Parish Disciplinarian"
-  ];
-
-  const localPositions = [
-    "Local Coordinator",
-    "Local vice coordinator",
-    "Local Secretary",
-    "Local vice secretary",
-    "Local litergist",
-    "Local vice litergist",
-    "Local organing secretary",
-    "Local games captain",
-    "Local Disciplinarian"
-  ];
+  const parishPositions = ["Parish Coordinator","Parish vice coordinator","Parish Secretary","Parish vice secretary","Parish Treasurer","Parish litergist","Parish vice litergist","Parish organing secretary","Parish games captain","Parish Disciplinarian"];
+  const localPositions = ["Local Coordinator","Local vice coordinator","Local Secretary","Local vice secretary","Local litergist","Local vice litergist","Local organing secretary","Local games captain","Local Disciplinarian"];
 
   if (roleSelect) {
     roleSelect.addEventListener('change', function() {
@@ -286,7 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (levelSelect) {
     levelSelect.addEventListener('change', function() {
       positionSelect.innerHTML = '<option value="">-- Choose Position --</option>';
-      
       if (this.value === 'parish') {
         parishPositions.forEach(pos => {
           const option = document.createElement('option');
@@ -295,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function() {
           positionSelect.appendChild(option);
         });
         positionSection.style.display = 'block';
-
       } else if (this.value === 'local') {
         localPositions.forEach(pos => {
           const option = document.createElement('option');
@@ -304,10 +217,10 @@ document.addEventListener('DOMContentLoaded', function() {
           positionSelect.appendChild(option);
         });
         positionSection.style.display = 'block';
-
       } else {
         positionSection.style.display = 'none';
       }
     });
   }
+
 });
