@@ -38,7 +38,7 @@ window.registerUser = function() {
       });
     })
     .then(() => {
-      alert("Registration successful. Please login.");
+      alert("Registration successful. Please login with the same email and password.");
       showform("login-form");
     })
     .catch(error => {
@@ -59,9 +59,24 @@ window.loginUser = function() {
   const password = document.getElementById("loginPassword").value;
 
   auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-      localStorage.setItem("loggedIn", "true");  
-      window.location.href = "Youths dashboard.html";   
+    .then(userCred => {
+      const user = userCred.user;
+
+      // Check if user exists in Firestore
+      db.collection("users").doc(user.uid).get()
+        .then(doc => {
+          if (doc.exists) {
+            // Save login state
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("userEmail", email);
+
+            // Redirect to dashboard
+            window.location.href = "Youths dashboard.html";
+          } else {
+            alert("No user record found. Please register first.");
+            showform("register-form");
+          }
+        });
     })
     .catch(error => {
       if (error.code === "auth/user-not-found") {
@@ -76,9 +91,30 @@ window.loginUser = function() {
 };
 
 // -----------------------
+// LOGOUT FUNCTION
+// -----------------------
+window.logoutUser = function() {
+  auth.signOut()
+    .then(() => {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("userEmail");
+      alert("You have successfully logged out.");
+      window.location.href = "index.html";
+    })
+    .catch(error => {
+      console.error("Logout Error:", error.message);
+    });
+};
+
+// -----------------------
 // PAGE LOAD EVENTS
 // -----------------------
 document.addEventListener('DOMContentLoaded', function() {
+
+  // Auto redirect if user already logged in
+  if (localStorage.getItem("loggedIn") === "true") {
+    window.location.href = "Youths dashboard.html";
+  }
 
   // CLICK LINKS FOR LOGIN/REGISTER
   const showRegisterLinks = document.querySelectorAll('.show-register');
@@ -99,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // -----------------------
   // DENARY → PARISH LOGIC
-  // (Your original code preserved)
   // -----------------------
   const parishData = {
     nyeri: [
@@ -203,7 +238,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // -----------------------
   // LEADERSHIP LOGIC
-  // (Your original code preserved)
   // -----------------------
   const roleSelect = document.getElementById('role');
   const leadershipSection = document.getElementById('leadershipSection');
@@ -277,5 +311,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-
-
