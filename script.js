@@ -61,7 +61,7 @@ window.loginUser = function() {
   auth.signInWithEmailAndPassword(email, password)
     .then(() => {
       localStorage.setItem("loggedIn", "true");  
-      window.location.href = "dashboard.html";   
+      window.location.href = "Youth dashboard.html";   
     })
     .catch(error => {
       if (error.code === "auth/user-not-found") {
@@ -277,3 +277,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
