@@ -1,15 +1,86 @@
-
-// script.js - consolidated JS: showform, denary->parish, leadership toggles
-
-// make showform available globally (for compatibility)
+// -----------------------
+// SHOW FORM FUNCTION
+// -----------------------
 window.showform = function(formId) {
   document.querySelectorAll(".form-box").forEach(form => form.classList.remove("active"));
   const el = document.getElementById(formId);
   if (el) el.classList.add("active");
 };
 
+// -----------------------
+// SECURE AUTH REGISTRATION
+// -----------------------
+window.registerUser = function() {
+  const fullName = document.getElementById("fullName").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const denary = document.getElementById("denary").value;
+  const parish = document.getElementById("parish").value;
+  const role = document.getElementById("role").value;
+  const level = document.getElementById("level").value;
+  const position = document.getElementById("position").value;
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(userCred => {
+      const user = userCred.user;
+
+      // Save extra user info in Firestore
+      return db.collection("users").doc(user.uid).set({
+        uid: user.uid,
+        fullName,
+        email,
+        denary,
+        parish,
+        role,
+        level,
+        position,
+        createdAt: new Date()
+      });
+    })
+    .then(() => {
+      alert("Registration successful. Please login.");
+      showform("login-form");
+    })
+    .catch(error => {
+      if (error.code === "auth/email-already-in-use") {
+        alert("This email is already registered. Please login.");
+        showform("login-form");
+      } else {
+        alert(error.message);
+      }
+    });
+};
+
+// -----------------------
+// SECURE LOGIN
+// -----------------------
+window.loginUser = function() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      localStorage.setItem("loggedIn", "true");  
+      window.location.href = "dashboard.html";   
+    })
+    .catch(error => {
+      if (error.code === "auth/user-not-found") {
+        alert("Account does not exist. Please register.");
+        showform("register-form");
+      } else if (error.code === "auth/wrong-password") {
+        alert("Wrong password.");
+      } else {
+        alert(error.message);
+      }
+    });
+};
+
+// -----------------------
+// PAGE LOAD EVENTS
+// -----------------------
 document.addEventListener('DOMContentLoaded', function() {
-  // Attach click handlers for the inline links (no inline onclicks required)
+
+  // CLICK LINKS FOR LOGIN/REGISTER
   const showRegisterLinks = document.querySelectorAll('.show-register');
   showRegisterLinks.forEach(a => {
     a.addEventListener('click', function(e) {
@@ -26,7 +97,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // PARISH/DENARY logic
+  // -----------------------
+  // DENARY → PARISH LOGIC
+  // (Your original code preserved)
+  // -----------------------
   const parishData = {
     nyeri: [
       "Our Lady of Consolata Cathedral",
@@ -104,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (denarySelect && parishSelect) {
     denarySelect.addEventListener("change", function() {
       const selectedDenary = this.value;
-      parishSelect.innerHTML = ""; // clear old options
+      parishSelect.innerHTML = "";
 
       if (selectedDenary && parishData[selectedDenary]) {
         const defaultOption = document.createElement("option");
@@ -127,7 +201,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // LEADERSHIP toggle and positions
+  // -----------------------
+  // LEADERSHIP LOGIC
+  // (Your original code preserved)
+  // -----------------------
   const roleSelect = document.getElementById('role');
   const leadershipSection = document.getElementById('leadershipSection');
   const positionSection = document.getElementById('positionSection');
@@ -166,7 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         leadershipSection.style.display = 'none';
         positionSection.style.display = 'none';
-        // reset selects
         levelSelect.value = '';
         positionSelect.innerHTML = '<option value="">-- Choose Position --</option>';
       }
@@ -176,6 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (levelSelect) {
     levelSelect.addEventListener('change', function() {
       positionSelect.innerHTML = '<option value="">-- Choose Position --</option>';
+      
       if (this.value === 'parish') {
         parishPositions.forEach(pos => {
           const option = document.createElement('option');
@@ -184,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
           positionSelect.appendChild(option);
         });
         positionSection.style.display = 'block';
+
       } else if (this.value === 'local') {
         localPositions.forEach(pos => {
           const option = document.createElement('option');
@@ -192,10 +270,10 @@ document.addEventListener('DOMContentLoaded', function() {
           positionSelect.appendChild(option);
         });
         positionSection.style.display = 'block';
+
       } else {
         positionSection.style.display = 'none';
       }
     });
   }
 });
-
