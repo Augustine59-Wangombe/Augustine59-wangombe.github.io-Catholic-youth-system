@@ -13,27 +13,31 @@
   <img src="images/Screenshot (107).png" alt="Welcoming Background" class="img1" />
 
   <div class="container">
-    <!-- Login box -->
+
+    <!-- LOGIN -->
     <div class="form-box active" id="login-form">
-      <form id="loginForm" action="">
+      <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
         <h2>Login</h2>
-        <input type="email" name="email" placeholder="email" class="selec" required />
-        <input type="password" name="password" placeholder="password" class="selec" required />
+
+        <input id="loginEmail" type="email" placeholder="Email" class="selec" required />
+        <input id="loginPassword" type="password" placeholder="Password" class="selec" required />
+
         <button type="submit" class="Login">Login</button>
+
         <p>Don't have an account? <a href="#" class="show-register">Register</a></p>
       </form>
     </div>
 
 
-    <!-- Register box -->
+    <!-- REGISTER -->
     <div class="form-box" id="register-form">
-      <form id="registerForm" action="">
+      <form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
         <h2>Register</h2>
 
-        <input type="text" name="name" placeholder="Name" class="selec" required />
-        <input type="text" name="diocese" placeholder="Diocese" class="selec" required />
+        <input id="fullName" type="text" placeholder="Name" class="selec" required />
+        <input id="diocese" type="text" placeholder="Diocese" class="selec" required />
 
-        <select id="denary" name="denary" required class="selec">
+        <select id="denary" required class="selec">
           <option value="">-- Choose Denary --</option>
           <option value="nyeri">Nyeri Denary</option>
           <option value="othaya">Othaya Denary</option>
@@ -45,15 +49,14 @@
           <option value="nanyuki">Nanyuki Denary</option>
         </select>
 
-        <!-- Parish Dropdown -->
-        <select id="parish" name="parish" required class="selec">
+        <select id="parish" required class="selec">
           <option value="">-- Select Denary First --</option>
         </select>
 
-        <input type="text" name="local_church" placeholder="Local Church" class="selec" />
+        <input id="localChurch" type="text" placeholder="Local Church" class="selec" />
 
-        <label for="Education">Select your level of Education:</label>
-        <select id="Education" name="Education" required class="selec">
+        <label>Select your level of Education:</label>
+        <select id="Education" class="selec" required>
           <option value="Secondary">Secondary</option>
           <option value="Certificate">Certificate</option>
           <option value="Diploma">Diploma</option>
@@ -62,117 +65,88 @@
           <option value="PhD">PhD</option>
         </select>
 
-        <label for="CurrentStatus">Select your current status:</label>
-        <select id="Current-Status" name="Current-Status" required class="selec">
+        <label>Current Status:</label>
+        <select id="CurrentStatus" class="selec" required>
           <option value="Student">Student</option>
           <option value="Employed">Employed</option>
-          <option value="Self-Employed">Self-employed</option>
+          <option value="Self-employed">Self-employed</option>
         </select>
 
-        <label for="Baptised">Baptised</label>
-        <select id="Baptised" name="Baptised" required class="selec">
+        <label>Baptised:</label>
+        <select id="Baptised" class="selec" required>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
 
-        <label for="Confirmed">Confirmed</label>
-        <select id="Confirmed" name="Confirmed" required class="selec">
+        <label>Confirmed:</label>
+        <select id="Confirmed" class="selec" required>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
 
-        <label for="Gender">Gender</label>
-        <select id="Gender" name="Gender" required class="selec">
+        <label>Gender:</label>
+        <select id="Gender" class="selec" required>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
 
-        <label for="MaritalStatus">Marital status</label>
-        <select id="Marital-Status" name="Marital-Status" required class="selec">
+        <label>Marital Status:</label>
+        <select id="MaritalStatus" class="selec" required>
           <option value="Single">Single</option>
           <option value="Married">Married</option>
         </select>
 
-
-<label for="Different abled">Different abled</label>
-        <select id="Different abled" name="Different-abled" required class="selec">
+        <label>Different Abled:</label>
+        <select id="DifferentAbled" class="selec" required>
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>
 
-        <label for="role">Select Role:</label>
-        <select id="role" name="role" required class="selec">
+        <label>Role:</label>
+        <select id="role" class="selec" required>
           <option value="">-- Choose Role --</option>
           <option value="member">Member</option>
           <option value="leader">Leader</option>
         </select>
 
-        <div id="leadershipSection" class="selec" style="display:none;">
-          <label for="level">Level of Leadership:</label>
-          <select id="level" name="level">
+        <div id="leadershipSection" style="display:none;">
+          <label>Level of Leadership:</label>
+          <select id="level">
             <option value="">-- Choose Level --</option>
             <option value="parish">Parish Level</option>
             <option value="local">Local Level</option>
           </select>
         </div>
 
-        <div id="positionSection" class="selec" style="display:none;">
-          <label for="position">Select leadership Position:</label>
-          <select id="position" name="position">
+        <div id="positionSection" style="display:none;">
+          <label>Leadership Position:</label>
+          <select id="position">
             <option value="">-- Choose Position --</option>
           </select>
         </div>
 
-        <input class="selec" type="Age" name="Age" placeholder="Enter your Age" required />
-        <input class="selec" type="tel" id="phone" name="phone" placeholder="Enter phone number"
+        <input id="Age" type="number" placeholder="Enter your Age" class="selec" required />
+
+        <input id="phone" type="tel" placeholder="Phone Number"
                pattern="[\+0-9]{10,15}" maxlength="15"
-               oninput="this.value = this.value.replace(/[^0-9+]/g, '')" required />
+               oninput="this.value = this.value.replace(/[^0-9+]/g, '')"
+               class="selec" required />
 
-      <input type="Email" name="Email" placeholder="Enter your Email" class="selec" required />
-      <input type="password" name="password" placeholder="Create password" class="selec" required />
+        <input id="email" type="email" placeholder="Enter your Email" class="selec" required />
+        <input id="password" type="password" placeholder="Create Password" class="selec" required />
 
-
-
-        
         <button class="register" type="submit">Register</button>
+
         <p>Already have an account? <a href="#" class="show-login">Login</a></p>
       </form>
     </div>
+
   </div>
-  
-  
 
-<script type="module" src="firebase.js"></script>
 
-  <!-- Load script at the end so DOM is ready -->
+  <!-- Your links kept EXACT -->
+  <script type="module" src="firebase.js"></script>
   <script src="script.js"></script>
+
 </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </html>
