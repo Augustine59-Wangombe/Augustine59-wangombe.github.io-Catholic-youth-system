@@ -24,10 +24,11 @@
 
         <button type="submit" class="Login">Login</button>
 
-        <p>Don't have an account? <a href="#" class="show-register">Register</a></p>
+        <p>Don't have an account? 
+          <a href="#" onclick="showform('register-form')">Register</a>
+        </p>
       </form>
     </div>
-
 
     <!-- REGISTER -->
     <div class="form-box" id="register-form">
@@ -55,7 +56,7 @@
 
         <input id="localChurch" type="text" placeholder="Local Church" class="selec" />
 
-        <label>Select your level of Education:</label>
+        <label>Education Level:</label>
         <select id="Education" class="selec" required>
           <option value="Secondary">Secondary</option>
           <option value="Certificate">Certificate</option>
@@ -126,7 +127,6 @@
         </div>
 
         <input id="Age" type="number" placeholder="Enter your Age" class="selec" required />
-
         <input id="phone" type="tel" placeholder="Phone Number"
                pattern="[\+0-9]{10,15}" maxlength="15"
                oninput="this.value = this.value.replace(/[^0-9+]/g, '')"
@@ -137,16 +137,16 @@
 
         <button class="register" type="submit">Register</button>
 
-        <p>Already have an account? <a href="#" class="show-login">Login</a></p>
+        <p>Already have an account? 
+          <a href="#" onclick="showform('login-form')">Login</a>
+        </p>
       </form>
     </div>
 
   </div>
 
-
-  <!-- Your links kept EXACT -->
+  <!-- Links untouched as requested -->
   <script type="module" src="firebase.js"></script>
   <script src="script.js"></script>
-
 </body>
 </html>
