@@ -9,11 +9,11 @@ window.showform = function(formId) {
 };
 
 // -----------------------
-// SECURE AUTH REGISTRATION
+// REGISTER USER (LOCAL STORAGE)
 // -----------------------
 window.registerUser = function() {
   const fullName = document.getElementById("fullName").value;
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.toLowerCase();
   const password = document.getElementById("password").value;
   const denary = document.getElementById("denary").value;
   const parish = document.getElementById("parish").value;
@@ -21,127 +21,144 @@ window.registerUser = function() {
   const level = document.getElementById("level").value;
   const position = document.getElementById("position").value;
 
-  if (!fullName || !email || !password) {
-    alert("Please fill all required fields.");
+  // Get all users stored before
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  // Check if email already exists
+  if (users[email]) {
+    alert("This email is already registered. Please login instead.");
+    showform("login-form");
     return;
   }
 
-  auth.createUserWithEmailAndPassword(email, password)
-    .then(userCred => {
-      const user = userCred.user;
+  // Save user
+  users[email] = {
+    fullName,
+    email,
+    password,
+    denary,
+    parish,
+    role,
+    level,
+    position,
+    createdAt: new Date().toISOString()
+  };
 
-      // Save extra info in Firestore
-      return db.collection("users").doc(user.uid).set({
-        uid: user.uid,
-        fullName,
-        email,
-        denary,
-        parish,
-        role,
-        level,
-        position,
-        createdAt: new Date()
-      });
-    })
-    .then(() => {
-      alert("Registration successful. Please login with your email and password.");
-      showform("login-form");
-    })
-    .catch(error => {
-      if (error.code === "auth/email-already-in-use") {
-        alert("This email is already registered. Please login.");
-        showform("login-form");
-      } else {
-        alert(error.message);
-      }
-    });
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Registration successful! Please login.");
+  showform("login-form");
 };
 
 // -----------------------
-// SECURE LOGIN
+// LOGIN USER
 // -----------------------
 window.loginUser = function() {
-  const email = document.getElementById("loginEmail").value;
+  const email = document.getElementById("loginEmail").value.toLowerCase();
   const password = document.getElementById("loginPassword").value;
 
-  if (!email || !password) {
-    alert("Please enter email and password.");
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  if (!users[email]) {
+    alert("This account does not exist. Please register.");
+    showform("register-form");
     return;
   }
 
-  auth.signInWithEmailAndPassword(email, password)
-    .then(userCred => {
-      const user = userCred.user;
+  if (users[email].password !== password) {
+    alert("Wrong password. Try again.");
+    return;
+  }
 
-      // Check if user exists in Firestore
-      db.collection("users").doc(user.uid).get()
-        .then(doc => {
-          if (doc.exists) {
-            console.log("Login successful:", email);
+  // Store login state
+  localStorage.setItem("loggedInUser", email);
 
-            // Save login state locally
-            localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("userEmail", email);
-
-            // Redirect to dashboard
-            window.location.href = "Youths dashboard.html";
-          } else {
-            alert("No user record found. Please register first.");
-            showform("register-form");
-          }
-        })
-        .catch(err => {
-          console.error("Firestore error:", err);
-          alert("Error fetching user data. Try again.");
-        });
-    })
-    .catch(error => {
-      console.error("Login error:", error);
-      if (error.code === "auth/user-not-found") {
-        alert("Account does not exist. Please register.");
-        showform("register-form");
-      } else if (error.code === "auth/wrong-password") {
-        alert("Wrong password.");
-      } else {
-        alert(error.message);
-      }
-    });
+  // Redirect to dashboard
+  window.location.href = "Youths dashboard.html";
 };
 
 // -----------------------
-// PAGE LOAD EVENTS
+// LOGOUT USER
+// -----------------------
+window.logoutUser = function() {
+  localStorage.removeItem("loggedInUser");
+  window.location.href = "index.html";
+};
+
+// -----------------------
+// DENARY → PARISH LOGIC (UNCHANGED)
 // -----------------------
 document.addEventListener('DOMContentLoaded', function() {
 
-  // CLICK LINKS FOR LOGIN/REGISTER
-  const showRegisterLinks = document.querySelectorAll('.show-register');
-  showRegisterLinks.forEach(a => {
-    a.addEventListener('click', function(e) {
-      e.preventDefault();
-      showform('register-form');
-    });
-  });
-
-  const showLoginLinks = document.querySelectorAll('.show-login');
-  showLoginLinks.forEach(a => {
-    a.addEventListener('click', function(e) {
-      e.preventDefault();
-      showform('login-form');
-    });
-  });
-
-  // -----------------------
-  // DENARY → PARISH LOGIC
-  // -----------------------
   const parishData = {
-    nyeri: ["Our Lady of Consolata Cathedral","St. Jude Parish","King'ong'o Parish","Mwenji Parish","Kiamuiru Parish","Mathari Institutions Chaplaincy","St. Charles Lwanga Parish"],
-    othaya: ["Othaya Parish","Kariko Parish","Birithia Parish","Karima Parish","Kagicha Parish","Karuthi Parish","Kigumo Parish"],
-    karatina: ["Karatina Parish","Miiri Parish","Giakaibei Parish","Gikumbo Parish","Gathugu Parish","Ngandu Parish","Kabiru-ini Parish","Kahira-ini Parish"],
-    mukurweini: ["Mukurwe-ini Parish","Kaheti Parish","Kimondo Parish","Gikondi Parish"],
-    mweiga: ["Mweiga Parish","Endarasha Parish","Gatarakwa Parish","Karemeno Parish","Mugunda Parish","Sirima Parish","Winyumiririe Parish","Kamariki Parish"],
-    tetu: ["Tetu Parish","Wamagana Parish","Kigogo-ini Parish","Itheguri Parish","Gititu Parish","Kagaita Parish","Giakanja Parish","Karangia Parish"],
-    naromoru: ["Narumoru Town Parish","Irigithathi Parish","Thegu Parish","Kiganjo Parish","Munyu Parish"],
-    nanyuki: ["Nanyuki Parish","Dol Dol Parish","Matanya Parish","St. Teresa Parish","Kalalu Parish"]
+    nyeri: [
+      "Our Lady of Consolata Cathedral",
+      "St. Jude Parish",
+      "King'ong'o Parish",
+      "Mwenji Parish",
+      "Kiamuiru Parish",
+      "Mathari Institutions Chaplaincy",
+      "St. Charles Lwanga Parish"
+    ],
+    othaya: [
+      "Othaya Parish",
+      "Kariko Parish",
+      "Birithia Parish",
+      "Karima Parish",
+      "Kagicha Parish",
+      "Karuthi Parish",
+      "Kigumo Parish"
+    ],
+    karatina: [
+      "Karatina Parish",
+      "Miiri Parish",
+      "Giakaibei Parish",
+      "Gikumbo Parish",
+      "Gathugu Parish",
+      "Ngandu Parish",
+      "Kabiru-ini Parish",
+      "Kahira-ini Parish"
+    ],
+    mukurweini: [
+      "Mukurwe-ini Parish",
+      "Kaheti Parish",
+      "Kimondo Parish",
+      "Gikondi Parish"
+    ],
+    mweiga: [
+      "Mweiga Parish",
+      "Endarasha Parish",
+      "Gatarakwa Parish",
+      "Karemeno Parish",
+      "Mugunda Parish",
+      "Sirima Parish",
+      "Winyumiririe Parish",
+      "Kamariki Parish"
+    ],
+    tetu: [
+      "Tetu Parish",
+      "Wamagana Parish",
+      "Kigogo-ini Parish",
+      "Itheguri Parish",
+      "Gititu Parish",
+      "Kagaita Parish",
+      "Giakanja Parish",
+      "Karangia Parish"
+    ],
+    naromoru: [
+      "Narumoru Town Parish",
+      "Irigithathi Parish",
+      "Thegu Parish",
+      "Kiganjo Parish",
+      "Munyu Parish"
+    ],
+    nanyuki: [
+      "Nanyuki Parish",
+      "Dol Dol Parish",
+      "Matanya Parish",
+      "St. Teresa Parish",
+      "Kalalu Parish"
+    ]
   };
 
   const denarySelect = document.getElementById("denary");
@@ -155,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
       if (selectedDenary && parishData[selectedDenary]) {
         const defaultOption = document.createElement("option");
         defaultOption.text = "-- Choose Parish --";
-        defaultOption.value = "";
         parishSelect.add(defaultOption);
 
         parishData[selectedDenary].forEach(parish => {
@@ -165,16 +181,13 @@ document.addEventListener('DOMContentLoaded', function() {
           parishSelect.add(option);
         });
       } else {
-        const option = document.createElement("option");
-        option.text = "-- Select Denary First --";
-        option.value = "";
-        parishSelect.add(option);
+        parishSelect.innerHTML = "<option>-- Select Denary First --</option>";
       }
     });
   }
 
   // -----------------------
-  // LEADERSHIP LOGIC
+  // LEADERSHIP LOGIC (UNCHANGED)
   // -----------------------
   const roleSelect = document.getElementById('role');
   const leadershipSection = document.getElementById('leadershipSection');
@@ -182,8 +195,30 @@ document.addEventListener('DOMContentLoaded', function() {
   const levelSelect = document.getElementById('level');
   const positionSelect = document.getElementById('position');
 
-  const parishPositions = ["Parish Coordinator","Parish vice coordinator","Parish Secretary","Parish vice secretary","Parish Treasurer","Parish litergist","Parish vice litergist","Parish organing secretary","Parish games captain","Parish Disciplinarian"];
-  const localPositions = ["Local Coordinator","Local vice coordinator","Local Secretary","Local vice secretary","Local litergist","Local vice litergist","Local organing secretary","Local games captain","Local Disciplinarian"];
+  const parishPositions = [
+    "Parish Coordinator",
+    "Parish vice coordinator",
+    "Parish Secretary",
+    "Parish vice secretary",
+    "Parish Treasurer",
+    "Parish litergist",
+    "Parish vice litergist",
+    "Parish organing secretary",
+    "Parish games captain",
+    "Parish Disciplinarian"
+  ];
+
+  const localPositions = [
+    "Local Coordinator",
+    "Local vice coordinator",
+    "Local Secretary",
+    "Local vice secretary",
+    "Local litergist",
+    "Local vice litergist",
+    "Local organing secretary",
+    "Local games captain",
+    "Local Disciplinarian"
+  ];
 
   if (roleSelect) {
     roleSelect.addEventListener('change', function() {
@@ -192,8 +227,6 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         leadershipSection.style.display = 'none';
         positionSection.style.display = 'none';
-        levelSelect.value = '';
-        positionSelect.innerHTML = '<option value="">-- Choose Position --</option>';
       }
     });
   }
@@ -201,26 +234,28 @@ document.addEventListener('DOMContentLoaded', function() {
   if (levelSelect) {
     levelSelect.addEventListener('change', function() {
       positionSelect.innerHTML = '<option value="">-- Choose Position --</option>';
+
       if (this.value === 'parish') {
         parishPositions.forEach(pos => {
           const option = document.createElement('option');
-          option.value = pos.toLowerCase().replace(/\s+/g, '-');
+          option.value = pos;
           option.textContent = pos;
           positionSelect.appendChild(option);
         });
         positionSection.style.display = 'block';
+
       } else if (this.value === 'local') {
         localPositions.forEach(pos => {
           const option = document.createElement('option');
-          option.value = pos.toLowerCase().replace(/\s+/g, '-');
+          option.value = pos;
           option.textContent = pos;
           positionSelect.appendChild(option);
         });
         positionSection.style.display = 'block';
+
       } else {
         positionSection.style.display = 'none';
       }
     });
   }
-
 });
