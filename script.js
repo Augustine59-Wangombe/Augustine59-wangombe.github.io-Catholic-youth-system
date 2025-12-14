@@ -152,11 +152,10 @@ document.addEventListener('DOMContentLoaded', function() {
 const renderBackend = "https://youth-data-backend.onrender.com";
 
 async function sendSTKPush() {
-  const phoneInput = document.getElementById("phone");
-  const phone = phoneInput.value.replace(/\s+/g, "");
+  const phone = document.getElementById("phone").value.trim();
 
-  if (!phone.startsWith("254") || phone.length !== 12) {
-    alert("Enter valid phone number in format 2547XXXXXXXX");
+  if (!/^2547\d{8}$/.test(phone)) {
+    alert("Use format 2547XXXXXXXX");
     return;
   }
 
@@ -164,21 +163,47 @@ async function sendSTKPush() {
     const res = await fetch(`${renderBackend}/stkpush`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone: phone, amount: 100 })
+      body: JSON.stringify({ phone, amount: 100 })
     });
 
     const data = await res.json();
-    console.log("STK Response:", data);
-    alert("If the number is valid, you will receive an STK prompt.");
+    console.log("STK:", data);
 
-    // Start polling payment status
+    alert("Check your phone for STK prompt");
     pollPaymentStatus(phone);
 
   } catch (err) {
     console.error(err);
-    alert("STK request failed. Check console.");
+    alert("Payment request failed");
   }
 }
+
+async function pollPaymentStatus(phone) {
+  const statusEl = document.getElementById("paymentStatus");
+  statusEl.textContent = "Waiting for payment...";
+
+  let attempts = 0;
+  const timer = setInterval(async () => {
+    attempts++;
+
+    const res = await fetch(
+      `${renderBackend}/check-payment?phone=${phone}`
+    );
+    const data = await res.json();
+
+    if (data.paid) {
+      clearInterval(timer);
+      statusEl.textContent = "Payment confirmed!";
+      registerUserAfterPayment();
+    }
+
+    if (attempts >= 12) {
+      clearInterval(timer);
+      statusEl.textContent = "Payment timeout";
+    }
+  }, 5000);
+}
+
 
 // ----------------------------
 // POLL PAYMENT STATUS
@@ -229,4 +254,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 
