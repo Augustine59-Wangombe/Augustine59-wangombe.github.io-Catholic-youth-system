@@ -1,39 +1,42 @@
-
 // -----------------------
 // SHOW FORM FUNCTION
 // -----------------------
-window.showform = function(formId) {
-  document.querySelectorAll(".form-box").forEach(form => form.classList.remove("active"));
+window.showform = function (formId) {
+  document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
   const el = document.getElementById(formId);
   if (el) el.classList.add("active");
 };
 
 // -----------------------
-// REGISTER USER (AFTER PAYMENT)
+// REGISTER USER (AFTER PAYMENT CONFIRMED)
 // -----------------------
 async function registerUserAfterPayment() {
-  const fullName = document.getElementById("fullName").value;
-  const email = document.getElementById("email").value.toLowerCase();
-  const password = document.getElementById("password").value;
-  const denary = document.getElementById("denary").value;
-  const parish = document.getElementById("parish").value;
-  const role = document.getElementById("role").value;
-  const level = document.getElementById("level").value;
-  const position = document.getElementById("position").value;
+  const fullName = document.getElementById("fullName")?.value.trim();
+  const email = document.getElementById("email")?.value.toLowerCase().trim();
+  const password = document.getElementById("password")?.value;
+  const denary = document.getElementById("denary")?.value;
+  const parish = document.getElementById("parish")?.value;
+  const role = document.getElementById("role")?.value;
+  const level = document.getElementById("level")?.value;
+  const position = document.getElementById("position")?.value;
 
-  let users = JSON.parse(localStorage.getItem("users")) || {};
+  if (!fullName || !email || !password || !denary || !parish || !role) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  const users = JSON.parse(localStorage.getItem("users")) || {};
 
   if (users[email]) {
-    alert("This email is already registered. Please login instead.");
+    alert("This email is already registered. Please login.");
     showform("login-form");
     return;
   }
 
-  // Save user after payment success
   users[email] = {
     fullName,
     email,
-    password,
+    password, // ⚠️ OK FOR TESTING ONLY
     denary,
     parish,
     role,
@@ -43,27 +46,27 @@ async function registerUserAfterPayment() {
   };
 
   localStorage.setItem("users", JSON.stringify(users));
-  alert("Registration successful! Please login.");
+  alert("✅ Registration successful! Please login.");
   showform("login-form");
 }
 
 // -----------------------
 // LOGIN USER
 // -----------------------
-window.loginUser = function() {
-  const email = document.getElementById("loginEmail").value.toLowerCase();
-  const password = document.getElementById("loginPassword").value;
+window.loginUser = function () {
+  const email = document.getElementById("loginEmail")?.value.toLowerCase().trim();
+  const password = document.getElementById("loginPassword")?.value;
 
-  let users = JSON.parse(localStorage.getItem("users")) || {};
+  const users = JSON.parse(localStorage.getItem("users")) || {};
 
   if (!users[email]) {
-    alert("This account does not exist. Please register.");
+    alert("Account not found. Please register.");
     showform("register-form");
     return;
   }
 
   if (users[email].password !== password) {
-    alert("Wrong password. Try again.");
+    alert("Incorrect password");
     return;
   }
 
@@ -72,17 +75,17 @@ window.loginUser = function() {
 };
 
 // -----------------------
-// LOGOUT USER
+// LOGOUT
 // -----------------------
-window.logoutUser = function() {
+window.logoutUser = function () {
   localStorage.removeItem("loggedInUser");
   window.location.href = "index.html";
 };
 
-// -----------------------
+// ----------------------------
 // DENARY → PARISH LOGIC
-// -----------------------
-document.addEventListener('DOMContentLoaded', function() {
+// ----------------------------
+document.addEventListener("DOMContentLoaded", () => {
   const parishData = {
     nyeri: ["Our Lady of Consolata Cathedral","St. Jude Parish","King'ong'o Parish","Mwenji Parish","Kiamuiru Parish","Mathari Institutions Chaplaincy","St. Charles Lwanga Parish"],
     othaya: ["Othaya Parish","Kariko Parish","Birithia Parish","Karima Parish","Kagicha Parish","Karuthi Parish","Kigumo Parish"],
@@ -98,50 +101,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const parishSelect = document.getElementById("parish");
 
   if (denarySelect && parishSelect) {
-    denarySelect.addEventListener("change", function() {
-      const selectedDenary = this.value;
-      parishSelect.innerHTML = "";
-      if (selectedDenary && parishData[selectedDenary]) {
-        const defaultOption = document.createElement("option");
-        defaultOption.text = "-- Choose Parish --";
-        parishSelect.add(defaultOption);
-        parishData[selectedDenary].forEach(parish => {
-          const option = document.createElement("option");
-          option.text = parish;
-          option.value = parish.toLowerCase().replace(/\s+/g, "_");
-          parishSelect.add(option);
-        });
-      } else {
-        parishSelect.innerHTML = "<option>-- Select Denary First --</option>";
-      }
-    });
-  }
-
-  // -----------------------
-  // LEADERSHIP LOGIC
-  // -----------------------
-  const roleSelect = document.getElementById('role');
-  const leadershipSection = document.getElementById('leadershipSection');
-  const positionSection = document.getElementById('positionSection');
-  const levelSelect = document.getElementById('level');
-  const positionSelect = document.getElementById('position');
-
-  const parishPositions = ["Parish Coordinator","Parish vice coordinator","Parish Secretary","Parish vice secretary","Parish Treasurer","Parish litergist","Parish vice litergist","Parish organing secretary","Parish games captain","Parish Disciplinarian"];
-  const localPositions = ["Local Coordinator","Local vice coordinator","Local Secretary","Local vice secretary","Local litergist","Local vice litergist","Local organing secretary","Local games captain","Local Disciplinarian"];
-
-  if (roleSelect) {
-    roleSelect.addEventListener('change', function() {
-      if (this.value === 'leader') leadershipSection.style.display = 'block';
-      else { leadershipSection.style.display = 'none'; positionSection.style.display = 'none'; }
-    });
-  }
-
-  if (levelSelect) {
-    levelSelect.addEventListener('change', function() {
-      positionSelect.innerHTML = '<option value="">-- Choose Position --</option>';
-      if (this.value === 'parish') { parishPositions.forEach(pos => { const option = document.createElement('option'); option.value = pos; option.textContent = pos; positionSelect.appendChild(option); }); positionSection.style.display = 'block'; }
-      else if (this.value === 'local') { localPositions.forEach(pos => { const option = document.createElement('option'); option.value = pos; option.textContent = pos; positionSelect.appendChild(option); }); positionSection.style.display = 'block'; }
-      else positionSection.style.display = 'none';
+    denarySelect.addEventListener("change", () => {
+      parishSelect.innerHTML = '<option value="">-- Choose Parish --</option>';
+      parishData[denarySelect.value]?.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        parishSelect.appendChild(opt);
+      });
     });
   }
 });
@@ -150,12 +117,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // M-PESA STK PUSH
 // ----------------------------
 const renderBackend = "https://youth-data-backend.onrender.com";
+const PAYMENT_AMOUNT = 100;
 
 async function sendSTKPush() {
-  const phone = document.getElementById("phone").value.trim();
+  const phone = document.getElementById("phone")?.value.trim();
 
   if (!/^2547\d{8}$/.test(phone)) {
-    alert("Use format 2547XXXXXXXX");
+    alert("Use phone format 2547XXXXXXXX");
     return;
   }
 
@@ -163,96 +131,61 @@ async function sendSTKPush() {
     const res = await fetch(`${renderBackend}/stkpush`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone, amount: 100 })
+      body: JSON.stringify({ phone, amount: PAYMENT_AMOUNT })
     });
 
     const data = await res.json();
-    console.log("STK:", data);
+    if (!res.ok) throw new Error(data.error || "STK failed");
 
-    alert("Check your phone for STK prompt");
+    alert("📲 Check your phone for STK prompt");
     pollPaymentStatus(phone);
 
   } catch (err) {
     console.error(err);
-    alert("Payment request failed");
+    alert("❌ Payment request failed");
   }
 }
 
-async function pollPaymentStatus(phone) {
-  const statusEl = document.getElementById("paymentStatus");
-  statusEl.textContent = "Waiting for payment...";
-
-  let attempts = 0;
-  const timer = setInterval(async () => {
-    attempts++;
-
-    const res = await fetch(
-      `${renderBackend}/check-payment?phone=${phone}`
-    );
-    const data = await res.json();
-
-    if (data.paid) {
-      clearInterval(timer);
-      statusEl.textContent = "Payment confirmed!";
-      registerUserAfterPayment();
-    }
-
-    if (attempts >= 12) {
-      clearInterval(timer);
-      statusEl.textContent = "Payment timeout";
-    }
-  }, 5000);
-}
-
-
 // ----------------------------
-// POLL PAYMENT STATUS
+// POLL PAYMENT STATUS (ONLY ONE VERSION)
 // ----------------------------
 async function pollPaymentStatus(phone) {
   const statusEl = document.getElementById("paymentStatus");
   statusEl.textContent = "Waiting for payment confirmation...";
 
-  const maxAttempts = 12; // 1 minute
-  const interval = 5000; // 5 seconds
   let attempts = 0;
+  const maxAttempts = 12;
 
   const timer = setInterval(async () => {
     attempts++;
+
     try {
       const res = await fetch(`${renderBackend}/check-payment?phone=${phone}`);
       const data = await res.json();
 
       if (data.paid) {
         clearInterval(timer);
-        statusEl.textContent = "Payment received! Registering...";
+        statusEl.textContent = "✅ Payment confirmed!";
         await registerUserAfterPayment();
-      } else {
-        statusEl.textContent = "Waiting for payment confirmation...";
       }
 
       if (attempts >= maxAttempts) {
         clearInterval(timer);
-        statusEl.textContent = "Payment not detected. Please try again.";
+        statusEl.textContent = "⏱ Payment timeout. Try again.";
       }
     } catch (err) {
-      console.error(err);
-      statusEl.textContent = "Error checking payment. Try again.";
       clearInterval(timer);
+      statusEl.textContent = "❌ Error checking payment";
     }
-  }, interval);
+  }, 5000);
 }
 
 // ----------------------------
-// ATTACH BUTTON EVENT
+// PAY BUTTON
 // ----------------------------
 document.addEventListener("DOMContentLoaded", () => {
-  const payBtn = document.getElementById("payBtn");
-  if (payBtn) {
-    payBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      sendSTKPush();
-    });
-  }
+  document.getElementById("payBtn")?.addEventListener("click", e => {
+    e.preventDefault();
+    sendSTKPush();
+  });
 });
-
-
