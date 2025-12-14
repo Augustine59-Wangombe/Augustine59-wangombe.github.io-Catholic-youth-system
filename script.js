@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ----------------------------
 // M-PESA STK PUSH
 // ----------------------------
-const renderBackend = "https://augustine59-wangombe-github-io-catholic-uorf.onrender.com";
+const renderBackend = "https://youth-data-backend.onrender.com";
 
 async function sendSTKPush() {
   const phoneInput = document.getElementById("phone");
@@ -229,3 +229,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
