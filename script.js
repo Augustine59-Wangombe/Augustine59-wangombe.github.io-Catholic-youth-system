@@ -1,7 +1,7 @@
 // -----------------------
 // SHOW FORM FUNCTION
 // -----------------------
-window.showform = function (formId) {
+window.showform = function(formId) {
   document.querySelectorAll(".form-box").forEach(f => f.classList.remove("active"));
   const el = document.getElementById(formId);
   if (el) el.classList.add("active");
@@ -36,7 +36,7 @@ async function registerUserAfterPayment() {
   users[email] = {
     fullName,
     email,
-    password, // ⚠️ OK FOR TESTING ONLY
+    password, // ⚠️ Plain text for testing only
     denary,
     parish,
     role,
@@ -53,7 +53,7 @@ async function registerUserAfterPayment() {
 // -----------------------
 // LOGIN USER
 // -----------------------
-window.loginUser = function () {
+window.loginUser = function() {
   const email = document.getElementById("loginEmail")?.value.toLowerCase().trim();
   const password = document.getElementById("loginPassword")?.value;
 
@@ -77,7 +77,7 @@ window.loginUser = function () {
 // -----------------------
 // LOGOUT
 // -----------------------
-window.logoutUser = function () {
+window.logoutUser = function() {
   localStorage.removeItem("loggedInUser");
   window.location.href = "index.html";
 };
@@ -111,6 +111,50 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  // -----------------------
+  // LEADERSHIP LOGIC
+  // -----------------------
+  const roleSelect = document.getElementById("role");
+  const leadershipSection = document.getElementById("leadershipSection");
+  const levelSelect = document.getElementById("level");
+  const positionSection = document.getElementById("positionSection");
+  const positionSelect = document.getElementById("position");
+
+  const parishPositions = ["Parish Coordinator","Parish vice coordinator","Parish Secretary","Parish vice secretary","Parish Treasurer","Parish litergist","Parish vice litergist","Parish organing secretary","Parish games captain","Parish Disciplinarian"];
+  const localPositions = ["Local Coordinator","Local vice coordinator","Local Secretary","Local vice secretary","Local litergist","Local vice litergist","Local organing secretary","Local games captain","Local Disciplinarian"];
+
+  roleSelect?.addEventListener("change", () => {
+    if (roleSelect.value === "leader") {
+      leadershipSection.style.display = "block";
+    } else {
+      leadershipSection.style.display = "none";
+      positionSection.style.display = "none";
+    }
+  });
+
+  levelSelect?.addEventListener("change", () => {
+    positionSelect.innerHTML = '<option value="">-- Choose Position --</option>';
+    if (levelSelect.value === "parish") {
+      parishPositions.forEach(pos => {
+        const opt = document.createElement("option");
+        opt.value = pos;
+        opt.textContent = pos;
+        positionSelect.appendChild(opt);
+      });
+      positionSection.style.display = "block";
+    } else if (levelSelect.value === "local") {
+      localPositions.forEach(pos => {
+        const opt = document.createElement("option");
+        opt.value = pos;
+        opt.textContent = pos;
+        positionSelect.appendChild(opt);
+      });
+      positionSection.style.display = "block";
+    } else {
+      positionSection.style.display = "none";
+    }
+  });
 });
 
 // ----------------------------
@@ -121,7 +165,6 @@ const PAYMENT_AMOUNT = 100;
 
 async function sendSTKPush() {
   const phone = document.getElementById("phone")?.value.trim();
-
   if (!/^2547\d{8}$/.test(phone)) {
     alert("Use phone format 2547XXXXXXXX");
     return;
@@ -135,7 +178,7 @@ async function sendSTKPush() {
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "STK failed");
+    if (!res.ok) throw new Error(data.error || "STK push failed");
 
     alert("📲 Check your phone for STK prompt");
     pollPaymentStatus(phone);
@@ -147,7 +190,7 @@ async function sendSTKPush() {
 }
 
 // ----------------------------
-// POLL PAYMENT STATUS (ONLY ONE VERSION)
+// POLL PAYMENT STATUS
 // ----------------------------
 async function pollPaymentStatus(phone) {
   const statusEl = document.getElementById("paymentStatus");
@@ -158,7 +201,6 @@ async function pollPaymentStatus(phone) {
 
   const timer = setInterval(async () => {
     attempts++;
-
     try {
       const res = await fetch(`${renderBackend}/check-payment?phone=${phone}`);
       const data = await res.json();
