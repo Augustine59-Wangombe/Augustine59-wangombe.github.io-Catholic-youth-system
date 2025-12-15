@@ -25,27 +25,27 @@ window.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     try { const getVal = (id) => form.querySelector(`#${id}`)?.value || "";
-      const data = {
-        name: form.name?.value || "",
-        diocese: form.diocese?.value || "",
-        denary: form.denary?.value || "",
-        parish: form.parish?.value || "",
-        local_church: form.local_church?.value || "",
-        Education: form.Education?.value || "",
-        Current_Status: form["Current-Status"]?.value ||"",
-        Baptised: form.Baptised?.value || "",
-        Confirmed: form.Confirmed?. value || "",
-        Gender: form.Gender?.value || "",
-        Marital_Status: form["Marital-Status"]?.value || "",
-        Different_abled: form["Different-abled"]?.value || "",
-        role: form.role?.value || "",
-        Age: form.Age?.value || "",
-        position: form.position?.value || "",
-        phone: form.phone?.value || "",
-        Email: form.Email?. value|| "",
-        password: form.password?.value || "",
-        timestamp: new Date()
-      };
+ const data = {
+  name: getVal("name"),
+  diocese: getVal("diocese"),
+  denary: getVal("denary"),
+  parish: getVal("parish"),
+  local_church: getVal("local_church"),
+  education: getVal("Education"),
+  current_status: getVal("Current-Status"),
+  baptised: getVal("Baptised"),
+  confirmed: getVal("Confirmed"),
+  gender: getVal("Gender"),
+  marital_status: getVal("Marital-Status"),
+  different_abled: getVal("Different-abled"),
+  role: getVal("role"),
+  age: getVal("Age"),
+  position: getVal("position"),
+  phone: getVal("phone"),
+  email: getVal("Email"),
+  password: getVal("password"),
+  timestamp: new Date()
+};
 
       await addDoc(collection(db, "registrations"), data);
       alert("✅ Registration saved successfully!");
@@ -57,6 +57,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
