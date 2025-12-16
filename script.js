@@ -12,8 +12,8 @@ window.showform = function(formId) {
 // REGISTER USER (LOCAL STORAGE)
 // -----------------------
 window.registerUser = function() {
-  const fullName = document.getElementById("fullName").value;
-  const email = document.getElementById("email").value.toLowerCase();
+  const fullName = document.getElementById("name").value;
+  const email = document.getElementById("Email").value.toLowerCase();
   const password = document.getElementById("password").value;
   const denary = document.getElementById("denary").value;
   const parish = document.getElementById("parish").value;
@@ -25,16 +25,16 @@ window.registerUser = function() {
   let users = JSON.parse(localStorage.getItem("users")) || {};
 
   // Check if email already exists
-  if (users[email]) {
+  if (users[Email]) {
     alert("This email is already registered. Please login instead.");
     showform("login-form");
     return;
   }
 
   // Save user
-  users[email] = {
-    fullName,
-    email,
+  users[Email] = {
+    name,
+    Email,
     password,
     denary,
     parish,
@@ -54,24 +54,24 @@ window.registerUser = function() {
 // LOGIN USER
 // -----------------------
 window.loginUser = function() {
-  const email = document.getElementById("loginEmail").value.toLowerCase();
+  const email = document.getElementById("Email").value.toLowerCase();
   const password = document.getElementById("loginPassword").value;
 
   let users = JSON.parse(localStorage.getItem("users")) || {};
 
-  if (!users[email]) {
+  if (!users[Email]) {
     alert("This account does not exist. Please register.");
     showform("register-form");
     return;
   }
 
-  if (users[email].password !== password) {
+  if (users[Email].password !== password) {
     alert("Wrong password. Try again.");
     return;
   }
 
   // Store login state
-  localStorage.setItem("loggedInUser", email);
+  localStorage.setItem("loggedInUser", Email);
 
   // Redirect to dashboard
   window.location.href = "Youths dashboard.html";
@@ -259,3 +259,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
