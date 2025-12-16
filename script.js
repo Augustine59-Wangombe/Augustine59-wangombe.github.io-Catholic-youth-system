@@ -55,7 +55,7 @@ window.registerUser = function() {
 // -----------------------
 window.loginUser = function() {
   const email = document.getElementById("Email").value.toLowerCase();
-  const password = document.getElementById("loginPassword").value;
+  const password = document.getElementById("password").value;
 
   let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -86,7 +86,7 @@ window.logoutUser = function() {
 };
 
 // -----------------------
-// DENARY → PARISH LOGIC (UNCHANGED)
+// DENARY → PARISH LOGIC
 // -----------------------
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // -----------------------
-  // LEADERSHIP LOGIC (UNCHANGED)
+  // LEADERSHIP LOGIC 
   // -----------------------
   const roleSelect = document.getElementById('role');
   const leadershipSection = document.getElementById('leadershipSection');
@@ -259,4 +259,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
 
