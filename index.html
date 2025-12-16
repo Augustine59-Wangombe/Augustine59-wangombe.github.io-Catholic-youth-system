@@ -19,7 +19,7 @@
       <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
         <h2>Login</h2>
 
-        <input id="loginEmail" type="email" placeholder="Email" class="selec" required />
+        <input id="Email" type="email" placeholder="Email" class="selec" required />
         <input id="loginPassword" type="password" placeholder="Password" class="selec" required />
 
         <button type="submit" class="Login">Login</button>
@@ -54,7 +54,7 @@
           <option value="">-- Select Denary First --</option>
         </select>
 
-        <input id="localChurch" type="text" placeholder="Local Church" class="selec" />
+        <input id="local_Church" type="text" placeholder="Local Church" class="selec" />
 
         <label>Education Level:</label>
         <select id="Education" class="selec" required>
@@ -67,7 +67,7 @@
         </select>
 
         <label>Current Status:</label>
-        <select id="CurrentStatus" class="selec" required>
+        <select id="Current_Status" class="selec" required>
           <option value="Student">Student</option>
           <option value="Employed">Employed</option>
           <option value="Self-employed">Self-employed</option>
@@ -92,13 +92,13 @@
         </select>
 
         <label>Marital Status:</label>
-        <select id="MaritalStatus" class="selec" required>
+        <select id="Marital_Status" class="selec" required>
           <option value="Single">Single</option>
           <option value="Married">Married</option>
         </select>
 
         <label>Different Abled:</label>
-        <select id="DifferentAbled" class="selec" required>
+        <select id="Different_abled" class="selec" required>
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>
@@ -131,8 +131,8 @@
                pattern="[\+0-9]{10,15}" maxlength="15"
                oninput="this.value = this.value.replace(/[^0-9+]/g, '')"
                class="selec" required />
-
-        <input id="email" type="email" placeholder="Enter your Email" class="selec" required />
+  
+        <input   id="Email" type="email" placeholder="Enter your Email" class="selec" required />
         <input id="password" type="password" placeholder="Create Password" class="selec" required />
 
         <button class="register" type="submit">Register</button>
@@ -150,4 +150,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
