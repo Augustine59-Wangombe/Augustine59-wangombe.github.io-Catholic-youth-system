@@ -6,11 +6,17 @@
   <title>Youths dashboard</title>
 </head>
 
-<script>
-  if (!localStorage.getItem("loggedInUser")) {
-    alert("Please login first.");
-    window.location.href = "index.html";
-  }
+<script type="module">
+  import { getAuth, onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  const auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "index.html";
+    }
+  });
 </script>
   
 
@@ -163,6 +169,7 @@
 
 </body>
 </html>
+
 
 
 
