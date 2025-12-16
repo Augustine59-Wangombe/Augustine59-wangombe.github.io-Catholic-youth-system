@@ -19,8 +19,8 @@
       <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
         <h2>Login</h2>
 
-        <input id="Email" type="email" placeholder="Email" class="selec" required />
-        <input id="password" type="password" placeholder="Password" class="selec" required />
+        <input id="loginEmail" type="email" placeholder="Email" class="selec" required />
+        <input id="loginpassword" type="password" placeholder="Password" class="selec" required />
 
         <button type="submit" class="Login">Login</button>
 
@@ -132,8 +132,8 @@
                oninput="this.value = this.value.replace(/[^0-9+]/g, '')"
                class="selec" required />
   
-        <input   id="Email" type="email" placeholder="Enter your Email" class="selec" required />
-        <input id="password" type="password" placeholder="Create Password" class="selec" required />
+        <input   id="registerEmail" type="email" placeholder="Enter your Email" class="selec" required />
+        <input id="registerpassword" type="password" placeholder="Create Password" class="selec" required />
 
         <button class="register" type="submit">Register</button>
 
@@ -150,6 +150,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
