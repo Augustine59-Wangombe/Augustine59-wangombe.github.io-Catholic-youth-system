@@ -7,82 +7,23 @@ window.showform = function(formId) {
   const el = document.getElementById(formId);
   if (el) el.classList.add("active");
 };
+import {
+  getAuth,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-// -----------------------
-// REGISTER USER (LOCAL STORAGE)
-// -----------------------
-window.registerUser = function() {
-  const fullName = document.getElementById("name").value;
-  const email = document.getElementById("Email").value.toLowerCase();
-  const password = document.getElementById("password").value;
-  const denary = document.getElementById("denary").value;
-  const parish = document.getElementById("parish").value;
-  const role = document.getElementById("role").value;
-  const level = document.getElementById("level").value;
-  const position = document.getElementById("position").value;
+const auth = getAuth();
 
-  // Get all users stored before
-  let users = JSON.parse(localStorage.getItem("users")) || {};
+window.loginUser = async function () {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
 
-  // Check if email already exists
-  if (users[Email]) {
-    alert("This email is already registered. Please login instead.");
-    showform("login-form");
-    return;
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "Youths dashboard.html";
+  } catch (error) {
+    alert("Login failed: " + error.message);
   }
-
-  // Save user
-  users[Email] = {
-    name,
-    Email,
-    password,
-    denary,
-    parish,
-    role,
-    level,
-    position,
-    createdAt: new Date().toISOString()
-  };
-
-  localStorage.setItem("users", JSON.stringify(users));
-
-  alert("Registration successful! Please login.");
-  showform("login-form");
-};
-
-// -----------------------
-// LOGIN USER
-// -----------------------
-window.loginUser = function() {
-  const Email = document.getElementById("Email").value.toLowerCase();
-  const password = document.getElementById("password").value;
-
-  let users = JSON.parse(localStorage.getItem("users")) || {};
-
-  if (!users[Email]) {
-    alert("This account does not exist. Please register.");
-    showform("register-form");
-    return;
-  }
-
-  if (users[Email].password !== password) {
-    alert("Wrong password. Try again.");
-    return;
-  }
-
-  // Store login state
-  localStorage.setItem("loggedInUser", Email);
-
-  // Redirect to dashboard
-  window.location.href = "Youths dashboard.html";
-};
-
-// -----------------------
-// LOGOUT USER
-// -----------------------
-window.logoutUser = function() {
-  localStorage.removeItem("loggedInUser");
-  window.location.href = "index.html";
 };
 
 // -----------------------
@@ -259,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
 
 
 
