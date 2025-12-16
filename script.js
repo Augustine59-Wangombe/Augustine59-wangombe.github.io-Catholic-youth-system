@@ -54,7 +54,7 @@ window.registerUser = function() {
 // LOGIN USER
 // -----------------------
 window.loginUser = function() {
-  const email = document.getElementById("Email").value.toLowerCase();
+  const Email = document.getElementById("Email").value.toLowerCase();
   const password = document.getElementById("password").value;
 
   let users = JSON.parse(localStorage.getItem("users")) || {};
@@ -259,5 +259,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
 
 
