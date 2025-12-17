@@ -1,36 +1,35 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// -----------------------------
+// FIREBASE SDKs (CDN - REQUIRED)
+// -----------------------------
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// -----------------------------
+// FIREBASE CONFIG
+// -----------------------------
 const firebaseConfig = {
   apiKey: "AIzaSyAeKFby7DVFy80702igVrqN-dauNiK-C_Q",
   authDomain: "nyeri-catholic-youth-app.firebaseapp.com",
-  databaseURL: "https://nyeri-catholic-youth-app-default-rtdb.firebaseio.com",
   projectId: "nyeri-catholic-youth-app",
-  storageBucket: "nyeri-catholic-youth-app.firebasestorage.app",
+  storageBucket: "nyeri-catholic-youth-app.appspot.com",
   messagingSenderId: "2807748399",
-  appId: "1:2807748399:web:a33abb5ea33a2d387bb3da",
-  measurementId: "G-9HRL1S4BDP"
+  appId: "1:2807748399:web:a33abb5ea33a2d387bb3da"
 };
 
-// Initialize Firebase
+// -----------------------------
+// INITIALIZE FIREBASE
+// -----------------------------
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-import {
-  getAuth,
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-const db = getFirestore(app);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
+// -----------------------------
+// REGISTER FORM HANDLER
+// -----------------------------
 window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("registerForm");
+  if (!form) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // 1️⃣ Create Auth account
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
-      // 2️⃣ Save profile (NO password)
+      // 2️⃣ Save profile to Firestore
       await addDoc(collection(db, "registrations"), {
         uid: userCred.user.uid,
         name: getVal("name"),
@@ -70,8 +69,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     } catch (error) {
       alert(error.message);
+      console.error(error);
     }
   });
 });
-
-
