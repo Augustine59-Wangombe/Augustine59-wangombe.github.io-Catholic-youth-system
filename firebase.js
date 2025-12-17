@@ -11,7 +11,8 @@ const firebaseConfig = {
   projectId: "nyeri-catholic-youth-app",
   storageBucket: "nyeri-catholic-youth-app.appspot.com",
   messagingSenderId: "2807748399",
-  appId: "1:2807748399:web:a33bb5ea33a2ad87bb3da"
+  appId: "1:2807748399:web:a33bb5ea33a2ad87bb3da",
+  measurementId: "G-9HRL154BDP",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -62,3 +63,4 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
