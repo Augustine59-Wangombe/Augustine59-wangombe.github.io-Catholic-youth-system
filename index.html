@@ -20,7 +20,8 @@
         <h2>Login</h2>
 
         <input id="loginEmail" type="email" placeholder="Email" class="selec" required />
-        <input id="loginpassword" type="password" placeholder="Password" class="selec" required />
+        
+        <input id="loginPassword" type="password" placeholder="Password" class="selec" required />
 
         <button type="submit" class="Login">Login</button>
 
@@ -32,7 +33,7 @@
 
     <!-- REGISTER -->
     <div class="form-box" id="register-form">
-      <form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
+      <form id="registerForm">
         <h2>Register</h2>
 
         <input id="name" type="text" placeholder="Name" class="selec" required />
@@ -131,9 +132,10 @@
                pattern="[\+0-9]{10,15}" maxlength="15"
                oninput="this.value = this.value.replace(/[^0-9+]/g, '')"
                class="selec" required />
-  
-        <input   id="registerEmail" type="email" placeholder="Enter your Email" class="selec" required />
-        <input id="registerpassword" type="password" placeholder="Create Password" class="selec" required />
+
+        <input id="registerEmail" type="email" placeholder="Enter your Email" class="selec" required />
+       
+        <input id="registerPassword" type="password" placeholder="Create Password" class="selec" required />
 
         <button class="register" type="submit">Register</button>
 
@@ -145,15 +147,7 @@
 
   </div>
 
- 
   <script type="module" src="firebase.js"></script>
   <script type="module" src="script.js"></script>
 </body>
-</html>
-
-
-
-
-
-
-
+        </html>
