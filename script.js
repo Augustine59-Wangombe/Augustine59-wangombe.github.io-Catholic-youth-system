@@ -25,7 +25,30 @@ window.loginUser = async function () {
     alert("Login failed: " + error.message);
   }
 };
+import {
+  getAuth,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
+const auth = getAuth();
+
+window.loginUser = async function () {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  if (!email || !password) {
+    alert("Email and password are required");
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "Youths dashboard.html";
+  } catch (error) {
+    alert("Login failed: " + error.message);
+    console.error(error);
+  }
+};
 // -----------------------
 // DENARY → PARISH LOGIC
 // -----------------------
@@ -200,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
 
 
 
