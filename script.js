@@ -16,7 +16,7 @@ const auth = getAuth();
 
 window.loginUser = async function () {
   const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("Password").value;
+  const password = document.getElementById("loginPassword").value;
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -223,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
 
 
 
