@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const getVal = (id) => form.querySelector(`#${id}`)?.value || "";
 
     const email = getVal("registerEmail");
-    const password = getVal("registerPassword");
+    const password = getVal("registerpassword");
 
     try {
       // 1️⃣ Create Auth account
@@ -73,4 +73,5 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
