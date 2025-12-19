@@ -125,3 +125,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+
+document.getElementById("showLoginPassword").addEventListener("change", function() {
+  const input = document.getElementById("loginpassword");
+  input.type = this.checked ? "text" : "password";
+});
+
+
+document.getElementById("showRegisterPassword").addEventListener("change", function() {
+  const input = document.getElementById("registerpassword");
+  input.type = this.checked ? "text" : "password";
+});
