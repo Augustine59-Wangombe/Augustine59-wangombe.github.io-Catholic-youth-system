@@ -13,7 +13,9 @@
 
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      if (!user) window.location.href = "index.html";
+      if (!user) {
+        window.location.href = "index.html";
+      }
     });
   </script>
 
@@ -21,15 +23,23 @@
     body {
       background: rgb(0, 110, 255);
       margin: 0;
-      font-family: Arial, sans-serif;
     }
 
-    .H1, .H2 {
+    .H1 {
       color: whitesmoke;
+      font-size: 27px;
+      text-align: center;
+    }
+
+    .H2 {
+      color: whitesmoke;
+      font-size: 27px;
+      padding-top: 100px;
       text-align: center;
     }
 
     .IMG1 {
+      height: auto;
       width: 100%;
       max-width: 1200px;
       display: block;
@@ -37,6 +47,7 @@
     }
 
     .gallery {
+      padding-bottom: 200px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
@@ -45,20 +56,24 @@
     }
 
     .gallery img {
+      width: 100%;
       max-width: 200px;
+      margin: 10px;
       border-radius: 10px;
       transition: transform 0.3s;
+      height: auto;
     }
 
     .gallery img:hover {
       transform: scale(1.1);
     }
 
-    /* SLID
+    /* SLIDER */
     .slider {
       position: relative;
+      width: 100%;
       max-width: 1200px;
-      margin: 40px auto;
+      margin: 0 auto;
       overflow: hidden;
     }
 
@@ -76,16 +91,19 @@
 
     .slide img {
       width: 100%;
+      height: auto;
       display: block;
+      object-fit: cover;
     }
 
     .caption {
       position: absolute;
       bottom: 20px;
       left: 20px;
+      padding: 10px 20px;
       background: rgba(0,0,0,0.6);
       color: white;
-      padding: 10px 20px;
+      font-size: 1.2rem;
       border-radius: 6px;
     }
   </style>
@@ -95,7 +113,7 @@
 
 <h1 class="H1">Welcome to the Nyeri Catholic Youth Computerized System</h1>
 
-<img class="IMG1" src="images/file_0000000051047230a592fd301e83b357.png">
+<img class="IMG1" src="images/file_0000000051047230a592fd301e83b357.png" alt="Welcoming Background">
 
 <h2 class="H2">Click the icons to Explore</h2>
 
@@ -103,13 +121,17 @@
   <img src="images/download.png" onclick="Quovadis()">
   <img src="images/download (1).png" onclick="poly()">
   <img src="images/download (2).png" onclick="outspan()">
+  <img src="images/file_00000000150871f58fceeff916755fa4.png" onclick="mathari()">
+  <img src="images/file_000000005c7471f4a36e32759041bf17.png" onclick="kimathi()">
+  <img src="images/download (1).jpeg" onclick="mukrweini()">
+  <img src="images/Screenshot (110).png" onclick="carlo()">
 </div>
 
 <!-- SLIDER -->
 <div class="slider">
   <div class="slide active">
     <img src="images/divine-mercy-jesus-digital-painting-done-photoshop-182548279.jpg">
-    <div class="caption">Psalms 147:3 He heals the brokenhearted</div>
+    <div class="caption">Psalms 147:3 He heals the brokenhearted and binds up their wounds.</div>
   </div>
 
   <div class="slide">
@@ -119,12 +141,12 @@
 
   <div class="slide">
     <img src="images/9c4933ac921ad2a342bb3c46fb0e29e0.jpg">
-    <div class="caption">John 6:37 I will never drive them away</div>
+    <div class="caption">John 6:37 All those the Father gives me will come to me.</div>
   </div>
 
   <div class="slide">
     <img src="images/file_0000000058d47230b4d8ccd856b4c62c.png">
-    <div class="caption">Philippians 4:13</div>
+    <div class="caption">Philippians 4:13 I can do all this through him.</div>
   </div>
 </div>
 
@@ -139,5 +161,15 @@
   }, 5000);
 </script>
 
+<script>
+  function Quovadis(){ window.location.href="https://www.youtube.com/@quovadisyouthhub7892"; }
+  function poly(){ window.location.href="https://thenyeripoly.ac.ke"; }
+  function outspan(){ window.location.href="https://www.omc.ac.ke"; }
+  function mathari(){ window.location.href="https://consolatamedcollege.ac.ke"; }
+  function kimathi(){ window.location.href="https://www.dkut.ac.ke"; }
+  function mukrweini(){ window.location.href="https://Mukurweinitechnical.ac.ke"; }
+  function carlo(){ window.location.href="Carlo.html"; }
+</script>
+
 </body>
-</html>￼Enter
+</html>
