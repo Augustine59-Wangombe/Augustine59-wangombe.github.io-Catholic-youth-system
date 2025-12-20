@@ -138,15 +138,5 @@ document.getElementById("showRegisterPassword").addEventListener("change", funct
   input.type = this.checked ? "text" : "password";
 });
 
-const slides = document.querySelectorAll(".slide");
-let index = 0;
 
-function showSlide(i) {
-  slides[index].classList.remove("active");
-  index = (i + slides.length) % slides.length;
-  slides[index].classList.add("active");
-}
 
-setInterval(() => {
-  showSlide(index + 1);
-}, 5000);
