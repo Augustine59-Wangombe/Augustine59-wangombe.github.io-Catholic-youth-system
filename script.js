@@ -2,18 +2,26 @@
 // -----------------------
 // SHOW FORM FUNCTION
 // -----------------------
-window.showform = function(formId) {
-  document.querySelectorAll(".form-box").forEach(form => form.classList.remove("active"));
+window.showform = function (formId) {
+  document.querySelectorAll(".form-box")
+    .forEach(form => form.classList.remove("active"));
+
   const el = document.getElementById(formId);
   if (el) el.classList.add("active");
 };
-document.addEventListener('Domcontent Loaded ', Function () {
 
-Const ShowRegisterLinks=document.querySelectorAll(‘.show-register’);
-ShowRegisterLinks.forEach(a=> {
-a.addEventListener(‘click’, Function(e){
-e.prevent Default();
-ShowForm(‘register-form’);});
+// Wait until page loads
+document.addEventListener("DOMContentLoaded", function () {
+
+  const showRegisterLinks = document.querySelectorAll(".show-register");
+
+  showRegisterLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      showform("register-form");
+    });
+  });
+
 });
 // -----------------------
 // LOGIN FUNCTION
@@ -144,6 +152,7 @@ document.getElementById("showRegisterPassword").addEventListener("change", funct
   const input = document.getElementById("registerpassword");
   input.type = this.checked ? "text" : "password";
 });
+
 
 
 
