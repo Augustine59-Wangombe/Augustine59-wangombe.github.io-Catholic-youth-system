@@ -5,71 +5,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Youths dashboard</title>
+</head>
 
-  <!-- Firebase Auth -->
-  <script type="module">
-    import { getAuth, onAuthStateChanged } from
-    "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+<script type="module">
+  import { getAuth, onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "index.html";
-      }
-    });
-  </script>
+  const auth = getAuth();
 
-  <style>
-    body {
-      background: rgb(0, 110, 255);
-      margin: 0;
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "index.html";
     }
+  });
+</script>
+  
 
-    .H1 {
-      color: whitesmoke;
-      font-size: 27px;
-      text-align: center;
-    }
+<style>
+.H1{
+  color: whitesmoke;
+  font-size: 27px;
+ 
+}
 
-    .H2 {
-      color: whitesmoke;
-      font-size: 27px;
-      padding-top: 100px;
-      text-align: center;
-    }
+</style>
 
-    .IMG1 {
-      height: auto;
-      width: 100%;
-      max-width: 1200px;
-      display: block;
-      margin: auto;
-    }
+<h1 class="H1"><center>Welcome to the Nyeri Catholic Youth Computerized System</center></h1>
 
-    .gallery {
-      padding-bottom: 200px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      justify-items: center;
-      margin: 20px;
-    }
+<style>
+
+   .IMG1{
+           height: auto;
+           width:100%;
+           max-width:1200%;
+
+   }
+
+
+</style>
+
+<img class="IMG1" src="images/file_0000000051047230a592fd301e83b357.png" alt="Welcoming Background">
+
+
+<style>
+.H2{
+  color: whitesmoke;
+  font-size: 27px;
+  padding-top: 100px;
+}
+
+
+</style>
+
+
+<h2 class="H2"><center>Click the icons to Explore</center></h2>
+
+
+<br>
+<body>
+  
+
+<style>
+
+  body{
+    background: rgb(0, 110, 255);
+  }
+    
+.gallery{
+  padding-bottom: 200px;
+  display: grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap: 15px;
+  justify-items: center;
+  margin: 20px;
+}
+
 
     .gallery img {
+      
       width: 100%;
-      max-width: 200px;
+      max-width:200px ;
       margin: 10px;
       border-radius: 10px;
       transition: transform 0.3s;
       height: auto;
+      
+      
     }
-
     .gallery img:hover {
       transform: scale(1.1);
     }
 
-    /* SLIDER */
-    .slider {
+.slider {
       position: relative;
       width: 100%;
       max-width: 1200px;
@@ -91,7 +118,7 @@
 
     .slide img {
       width: 100%;
-      height: auto;
+      height: auto;  
       display: block;
       object-fit: cover;
     }
@@ -105,71 +132,131 @@
       color: white;
       font-size: 1.2rem;
       border-radius: 6px;
-    }
+  }
   </style>
 </head>
-
 <body>
+  
 
-<h1 class="H1">Welcome to the Nyeri Catholic Youth Computerized System</h1>
+  <div class="gallery">
+    <img src="images/download.png" alt="Picture 1" onclick="Quovadis()">
+    <img src="images/download (1).png" alt="Picture 2" onclick="poly()">
+    <img src="images/download (2).png" alt="Picture 3" onclick="outspan()">
+    <img src="images/file_00000000150871f58fceeff916755fa4.png" alt="Picture 4" onclick="mathari()">
+    <img src="images/file_000000005c7471f4a36e32759041bf17.png" alt="picture 5" onclick="kimathi()">
+    <img src="images/download (1).jpeg" alt="picture 6" onclick="mukrweini()">
+      <img src="images/Screenshot (110).png" alt="picture 7" onclick="carlo()">
+  </div>
 
-<img class="IMG1" src="images/file_0000000051047230a592fd301e83b357.png" alt="Welcoming Background">
 
-<h2 class="H2">Click the icons to Explore</h2>
 
-<div class="gallery">
-  <img src="images/download.png" onclick="Quovadis()">
-  <img src="images/download (1).png" onclick="poly()">
-  <img src="images/download (2).png" onclick="outspan()">
-  <img src="images/file_00000000150871f58fceeff916755fa4.png" onclick="mathari()">
-  <img src="images/file_000000005c7471f4a36e32759041bf17.png" onclick="kimathi()">
-  <img src="images/download (1).jpeg" onclick="mukrweini()">
-  <img src="images/Screenshot (110).png" onclick="carlo()">
-</div>
 
-<!-- SLIDER -->
+<script>
+  function Quovadis() {
+
+    window.location.href="https://www.youtube.com/@quovadisyouthhub7892"
+  }
+</script>
+
+
+
+<script>
+  function outspan(){
+
+    window.location.href="https://www.omc.ac.ke"
+  }
+</script>
+
+
+<script>
+  function mathari(){
+    window.location.href="https://consolatamedcollege.ac.ke"
+  }
+</script>
+
+
+
+<script>
+  function kimathi(){
+
+    window.location.href="https://www.dkut.ac.ke"
+  }
+</script>
+
+
+<script>
+  function poly(){
+
+    window.location.href="https://thenyeripoly.ac.ke"
+  }
+</script>
+
+
+
+
+
+<script>
+  function mukrweini(){
+
+    window.location.href="https://Mukurweinitechnical.ac.ke"
+  }
+</script>
+
+
+
+
+  <script>
+  function carlo(){
+
+    window.location.href="Carlo.html"
+  }
+</script>
+
+<br>
+  
+
+
+
+
 <div class="slider">
   <div class="slide active">
-    <img src="images/divine-mercy-jesus-digital-painting-done-photoshop-182548279.jpg">
+    <img src="images/divine-mercy-jesus-digital-painting-done-photoshop-182548279.jpg" alt="Slide 1">
     <div class="caption">Psalms 147:3 He heals the brokenhearted and binds up their wounds.</div>
   </div>
 
   <div class="slide">
-    <img src="images/Screenshot (124)_023050.png">
+    <img src="images/Screenshot (124)_023050.png" alt="Slide 2">
     <div class="caption">Hope does not disappoint</div>
   </div>
 
   <div class="slide">
-    <img src="images/9c4933ac921ad2a342bb3c46fb0e29e0.jpg">
-    <div class="caption">John 6:37 All those the Father gives me will come to me.</div>
+    <img src="images/9c4933ac921ad2a342bb3c46fb0e29e0.jpg" alt="Slide 3">
+    <div class="caption">John 6:37  All those the Father gives me will come to me, and whoever comes to me I will never drive away. </div>
   </div>
 
   <div class="slide">
-    <img src="images/file_0000000058d47230b4d8ccd856b4c62c.png">
-    <div class="caption">Philippians 4:13 I can do all this through him.</div>
-  </div>
+    <img src="images/file_0000000058d47230b4d8ccd856b4c62c.png"alt="Slide 4">
+    <div class="caption">Philippians 4:13  I can do all this through him who gives me strength.</div>
+  
 </div>
 
-<script>
-  const slides = document.querySelectorAll(".slide");
-  let index = 0;
-
-  setInterval(() => {
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-  }, 5000);
-</script>
 
 <script>
-  function Quovadis(){ window.location.href="https://www.youtube.com/@quovadisyouthhub7892"; }
-  function poly(){ window.location.href="https://thenyeripoly.ac.ke"; }
-  function outspan(){ window.location.href="https://www.omc.ac.ke"; }
-  function mathari(){ window.location.href="https://consolatamedcollege.ac.ke"; }
-  function kimathi(){ window.location.href="https://www.dkut.ac.ke"; }
-  function mukrweini(){ window.location.href="https://Mukurweinitechnical.ac.ke"; }
-  function carlo(){ window.location.href="Carlo.html"; }
+const slides = document.querySelectorAll(".slide");
+let index = 0;
+
+function showSlide(i) {
+  slides[index].classList.remove("active");
+  index = (i + slides.length) % slides.length;
+  slides[index].classList.add("active");
+}
+
+setInterval(() => {
+  showSlide(index + 1);
+}, 5000);
 </script>
 
+
+  
 </body>
 </html>
