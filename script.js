@@ -7,6 +7,8 @@ window.showform = function(formId) {
   const el = document.getElementById(formId);
   if (el) el.classList.add("active");
 };
+document.addEventListener('Domcontent Loaded ', Function () {
+
 Const ShowRegisterLinks=document.querySelectorAll(‘.show-register’);
 ShowRegisterLinks.forEach(a=> {
 a.addEventListener(‘click’, Function(e){
@@ -142,6 +144,7 @@ document.getElementById("showRegisterPassword").addEventListener("change", funct
   const input = document.getElementById("registerpassword");
   input.type = this.checked ? "text" : "password";
 });
+
 
 
 
