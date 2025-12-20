@@ -237,8 +237,28 @@ slider {
     <div class="caption">Philippians 4:13  I can do all this through him who gives me strength.</div>
   
 </div>
+
+
+<script>
+const slides = document.querySelectorAll(".slide");
+let index = 0;
+
+function showSlide(i) {
+  slides[index].classList.remove("active");
+  index = (i + slides.length) % slides.length;
+  slides[index].classList.add("active");
+}
+
+setInterval(() => {
+  showSlide(index + 1);
+}, 5000);
+</script>
+
+
+  
 </body>
 </html>
+
 
 
 
