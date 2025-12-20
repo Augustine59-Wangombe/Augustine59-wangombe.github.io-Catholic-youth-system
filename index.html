@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +21,10 @@
 
         <input id="loginEmail" type="email" placeholder="Email" class="selec" required />
         <input id="loginpassword" type="password" placeholder="Password" class="selec" required />
-         <label>
-  <input type="checkbox" id="showLoginPassword"> Show Password
-</label>
+
+        <label>
+          <input type="checkbox" id="showLoginPassword"> Show Password
+        </label>
 
         <button type="submit" class="Login">Login</button>
 
@@ -129,20 +131,24 @@
         </div>
 
         <input id="Age" type="number" placeholder="Enter your Age" class="selec" required />
+
         <input id="phone" type="tel" placeholder="Phone Number"
                pattern="[\+0-9]{10,15}" maxlength="15"
                oninput="this.value = this.value.replace(/[^0-9+]/g, '')"
                class="selec" required />
-  
+
         <input id="registerEmail" type="email" placeholder="Enter your Email" class="selec" required />
         <input id="registerpassword" type="password" placeholder="Create Password" class="selec" required />
-         <label>
-  <input type="checkbox" id="showRegisterPassword"> Show Password
-         </label>
+
+        <label>
+          <input type="checkbox" id="showRegisterPassword"> Show Password
+        </label>
+
         <button class="register" type="submit">Register</button>
 
+        <!-- ✅ FIXED LINE -->
         <p>Already have an account? 
-          <a href="#" onclick="nclick="s'login-form'i">Login</a>
+          <a href="#" onclick="showform('login-form')">Login</a>
         </p>
       </form>
     </div>
@@ -152,4 +158,4 @@
   <script type="module" src="firebase.js"></script>
   <script type="module" src="script.js"></script>
 </body>
-    </html>
+</html>
