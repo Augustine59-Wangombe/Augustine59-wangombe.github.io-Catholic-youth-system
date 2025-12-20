@@ -7,7 +7,12 @@ window.showform = function(formId) {
   const el = document.getElementById(formId);
   if (el) el.classList.add("active");
 };
-
+Const ShowRegisterLinks=document.querySelectorAll(‘.show-register’);
+ShowRegisterLinks.forEach(a=> {
+a.addEventListener(‘click’, Function(e){
+e.prevent Default();
+ShowForm(‘register-form’);});
+});
 // -----------------------
 // LOGIN FUNCTION
 // -----------------------
@@ -137,6 +142,7 @@ document.getElementById("showRegisterPassword").addEventListener("change", funct
   const input = document.getElementById("registerpassword");
   input.type = this.checked ? "text" : "password";
 });
+
 
 
 
