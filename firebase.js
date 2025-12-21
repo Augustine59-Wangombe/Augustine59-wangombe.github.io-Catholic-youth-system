@@ -24,9 +24,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// -----------------------------
-// REGISTER FORM HANDLER
-// -----------------------------
 window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("registerForm");
   if (!form) return;
@@ -73,5 +70,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
